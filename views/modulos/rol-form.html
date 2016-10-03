@@ -1,0 +1,81 @@
+<div class="content">
+    <div class="row">    
+
+        <div class="col-md-offset-3 col-md-6">
+            <div class='box box-primary'>
+                <div class='box-header with-border'>
+                    <h3 class='box-title'>Agregar Rol</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class='box-body'>
+                    <div class="row">
+                        <form name="miForm" ng-submit="vm.save();" novalidate>
+                        
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <label> Modulo <span class="text-red">(*)</span>:</label>
+                                <select ng-model="vm.rol.idmodulo" ng-options="item.idmodulo as item.nombre_modulo for item in vm.others.modulos" name="idmodulo" class="form-control input-sm mb-5" ng-required="vm.rol.idmodulo === 1">    
+                                <option value="">--- Seleccione una opción ---</option>                                    
+                                </select>
+                                <div ng-messages="miForm.idmodulo.$error" class="required" role="alert" ng-show="miForm.idmodulo.$dirty">
+                                    <div ng-message="required">El campo es requerido</div>
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <label> Nombre <span class="text-red">(*)</span>:</label>
+                                <input type="text" class="form-control"  name="nombre_rol" ng-model="vm.rol.nombre_rol" placeholder="Ejemplo" required/>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                                <div ng-messages="miForm.nombre_rol.$error" class="required" role="alert" ng-show="miForm.nombre_rol.$dirty">
+                                    <div ng-message="required">El campo es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <label> URL <span class="text-red">(*)</span>:</label>
+                                <input type="text" class="form-control"  name="url_rol" ng-model="vm.rol.url_rol" placeholder="#/ejemplo" required />
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                                <div ng-messages="miForm.url_rol.$error" class="required" role="alert" ng-show="miForm.url_rol.$dirty">
+                                    <div ng-message="required">El campo es requerido</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <label> Icono <span class="text-red">(*)</span>: <i class="{{vm.rol.icono}}"></i></label>
+                                <input type="text" class="form-control"  name="icono" ng-model="vm.rol.icono" placeholder="Ejemplo: fa fa-user" required />
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                                <div ng-messages="miForm.icono.$error" class="required" role="alert" ng-show="miForm.icono.$dirty">
+                                    <div ng-message="required">El campo es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="col-md-10 col-sm-6 col-xs-12">
+                                <button class="btn btn-social btn-primary" ng-disabled="miForm.$invalid || miForm.$submitted" data-toggle="tooltip" title="Guardar">
+                                        <i class="fa fa-save"></i> Guardar
+                                </button>
+                                <a ui-sref="rol.list" class="btn btn-social btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times"></i> Cancelar</a>
+                            </div>
+                        </div>
+                        </form>
+
+                    </div>                     
+                </div>
+            </div>
+                
+        </div>
+
+    </div>
+</div>
+<div ui-view></div>

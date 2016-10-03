@@ -1,0 +1,144 @@
+<div class="content">
+    <div class="row">    
+    <!-- start -->
+        <div class="col-md-3">
+            <!-- box -->
+            <div class='box box-primary'>
+
+                <div class='box-body'>
+                    <ul class="list-unstyled">
+                        <li class="text-center">
+                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" style="width: 110px;border: 3px solid #00a8e8;">
+                        </li>
+                        <li class="text-center">
+                            <h4 class="text-capitalize">Mario Arenas Vargas</h4>
+                            <p class="text-muted text-capitalize">Sede LA MERCED</p>
+                        </li>
+                    </ul>
+
+                    <div class="panel-group">
+                        <div class="panel panel-primary pnl-mdm">
+                            <div class="panel-heading pnl-mdm">
+                                <h4 class="panel-title text-center">Datos Generales</h4>
+                            </div>
+                            <div id="" class="panel-collapse">
+                                <ul class="list-group">
+                                    <a href="#/paciente-view"><li class="list-group-item">
+                                    Datos Personales <span class="pull-right"><i class="fa fa-user"></i></span>
+                                    </li></a>
+                                    <a href="#/paciente/familiar"><li class="list-group-item">
+                                    Familiares <span class="pull-right"><i class="fa fa-users"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Imagenes y Archivos <span class="pull-right"><i class="fa fa-files-o"></i></span>
+                                    </li></a>
+                                    <a href="#/paciente/cita"><li class="list-group-item">
+                                    Citas <span class="pull-right"><i class="fa fa-calendar-o"></i></span>
+                                    </li></a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-primary pnl-mdm">
+                            <div class="panel-heading pnl-mdm">
+                                <h4 class="panel-title text-center">Historial Clinico</h4>
+                            </div>
+                            <div id="" class="panel-collapse">
+                                <ul class="list-group">
+                                    <a href="#"><li class="list-group-item">
+                                    Presupuestos <span class="pull-right"><i class="fa fa-money"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Evoluciones<span class="pull-right"><i class="fa fa-cog"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Odontograma Actual <span class="pull-right"><i class="fa fa-cog"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Periodontograma<span class="pull-right"><i class="fa fa-cog"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Documentos Clinicos<span class="pull-right"><i class="fa fa-files-o"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Alertas<span class="pull-right"><i class="fa fa-bell"></i></span>
+                                    </li></a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-primary pnl-mdm">
+                            <div class="panel-heading pnl-mdm">
+                                <h4 class="panel-title text-center">Facturación</h4>
+                            </div>
+                            <div id="" class="panel-collapse">
+                                <ul class="list-group">
+                                    <a href="#"><li class="list-group-item">
+                                    Recaudación (Pagos) <span class="pull-right"><i class="fa fa-money"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Pagos Recibidos<span class="pull-right"><i class="fa fa-money"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Pagos Anulados <span class="pull-right"><i class="fa fa-money"></i></span>
+                                    </li></a>
+                                    <a href="#"><li class="list-group-item">
+                                    Balance Cliente<span class="pull-right"><i class="fa fa-cogs"></i></span>
+                                    </li></a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-9">
+                <!-- -->
+            <div class='box box-primary'>
+                <div class='box-header with-border'>
+                    <h3 class='box-title'>Lista de Citas</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class='box-body'>
+                    <div class="pull-right">                
+                        <a ui-sref="{{vm.stateparent}}.new" class="btn btn-sm btn-primary">Nuevo</a>
+                    </div>
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Doctor Responsable</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20/10/2016</td>
+                                <td>Doctor 1</td>
+                                <td><span class="label label-primary">Atendido</span></td>
+                            </tr>
+                            <tr>
+                                <td>20/10/2016</td>
+                                <td>Doctor 1</td>
+                                <td><span class="label label-primary">Atendido</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   
+                </div>
+            </div><!-- /.box -->
+                <!-- -->
+        </div>
+    <!-- -->
+    </div>
+</div>
+<div ui-view></div>

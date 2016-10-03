@@ -1,0 +1,44 @@
+<style>
+    .grid{ 
+        width: 100%;
+        height: 1020px;
+    }  
+    .required{
+        color: #F00;
+        font-size: 11px; 
+    }    
+    .searchlike{
+        width: 300px; color:#000 !important; font-weight: bold;
+    }
+</style>
+        <section class="content-header">
+          <h1>
+            {{$state.current.data.pageHeader.title}}
+            <small></small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li data-ng-repeat="breadcrumb in $state.current.data.breadcrumbs">{{breadcrumb.title}}</li>
+          </ol>
+        </section>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">  
+            <div class="mb-10" >                 
+                <button class="btn btn-info" type="button" ng-click='btnToggleFiltering()'>Buscar</button>
+
+                <div class="pull-right">                
+                    <a href="#" class="btn btn-sm btn-danger" tooltip-placement="top" uib-tooltip="Eliminar" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal('delete', vm.filaSelecciona[0])"><i class="fa fa-trash-o"></i> </a>
+                    <a ui-sref="{{vm.stateparent}}.edit({entidadId:vm.filaSelecciona[0].identidad})" class="btn btn-sm btn-warning" tooltip-placement="top" uib-tooltip="Editar" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-pencil"></i> </a> 
+                    <a class="btn btn-sm btn-success" tooltip-placement="top" uib-tooltip="Roles" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal();">Roles </a>
+                    <a ui-sref="grupo/nuevo" class="btn btn-sm btn-primary">Nuevo</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div ui-grid="vm.gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid fs-mini-grid" style="background: #fff"></div>                
+        </div>
+    </div> 
+</div>
+<div ui-view></div>

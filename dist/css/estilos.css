@@ -1,0 +1,43 @@
+.list-group a{
+	color: #000;
+}
+
+.list-group-item{
+	background: #EEEEEE;
+	border: 1px solid #ddd !important;
+	border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.list-group-item:hover{
+	background: #adadad;
+}
+
+.panel {
+    border-radius: 0px !important;
+}
+
+.panel-primary,.panel-heading {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+.pnl-mdm{
+	background-color: #00a8e8 !important;
+	border-color: #00a8e8 !important;
+}
+
+.box.box-primary {
+    border-top-color: #00a8e8;
+}
+
+.btn-primary {
+    background-color: #00a8e8;
+    border-color: #00a8e8;
+}
+
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: #028bbf;
+}

@@ -1,0 +1,15 @@
+<nav> 
+    <span uib-dropdown on-toggle="toggled(open)">
+        <button class="btn btn-sm" id="simple-dropdown" uib-dropdown-toggle>
+            {{ vm.gridOptions.desde}} - {{ vm.gridOptions.hasta}} de  {{ vm.gridOptions.totalItems}}
+        </button>
+        <ul class="uib-dropdown-menu pull-right" aria-labelledby="simple-dropdown">
+            <li ng-class="{disabled: vm.gridOptions.firstdisabled}"><a href="#" ng-click="vm.gridOptions.firstdisabled || vm.gridApi.pagination.seek(1)">Primera p&aacute;gina</a></li>
+            <li ng-class="{disabled: vm.gridOptions.lastdisabled}"><a href="#" ng-click="vm.gridOptions.lastdisabled || vm.gridApi.pagination.seek(vm.gridApi.pagination.getTotalPages())">&Uacute;ltima p&aacute;gina</a></li>
+        </ul>
+    </span>                        
+    <ul class="pagination pagination-sm no-margin mr-5">                            
+        <li ng-class="{disabled: vm.gridOptions.firstdisabled}"><a href="#" ng-click="vm.gridOptions.firstdisabled || vm.gridApi.pagination.previousPage()" tooltip-placement="top" uib-tooltip="Anterior">&lsaquo;</a></li>
+        <li ng-class="{disabled: vm.gridOptions.lastdisabled}"><a href="#" ng-click="vm.gridOptions.lastdisabled || vm.gridApi.pagination.nextPage()" tooltip-placement="top" uib-tooltip="Siguiente">&rsaquo;</a></li>                             
+    </ul>
+</nav>

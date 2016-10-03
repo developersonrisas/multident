@@ -1,0 +1,53 @@
+<div class="content">
+    <div class="row">    
+
+        <div class="col-md-offset-3 col-md-6">
+            <div class='box box-primary'>
+                <div class='box-header with-border'>
+                    <h3 class='box-title'>Agregar Grupo</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class='box-body'>
+                    <div class="row">
+                        <form name="miForm" ng-submit="vm.save();" novalidate>
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <label> Nombre <span class="text-red">(*)</span>:</label>
+                                <input type="text" class="form-control" name="nombre_grupo" ng-model="vm.grupo.nombre_grupo" required />
+                                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                                <div ng-messages="miForm.nombre_grupo.$error" class="required" role="alert" ng-show="miForm.nombre_grupo.$dirty">
+                                    <div ng-message="required">El campo es requerido</div>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                <label> Descripcion <span class="text-red">(*)</span>:</label>
+                                <textarea class="form-control" rows="3" name="descripcion" ng-model="vm.grupo.descripcion" required></textarea>
+                                <div ng-messages="miForm.descripcion.$error" class="required" role="alert" ng-show="miForm.descripcion.$dirty">
+                                    <div ng-message="required">El campo es requerido</div>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="col-md-10 col-sm-6 col-xs-12">
+                                <button class="btn btn-social btn-primary" ng-disabled="miForm.$invalid || miForm.$submitted" data-toggle="tooltip" title="Guardar">
+                                        <i class="fa fa-save"></i> Guardar
+                                </button>
+                                <a ui-sref="grupo.list" class="btn btn-social btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fa fa-times"></i> Cancelar</a>
+                            </div>
+                        </div>
+                        </form>
+
+                    </div>                     
+                </div>
+            </div>
+                
+        </div>
+
+    </div>
+</div>
