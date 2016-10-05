@@ -76,7 +76,9 @@
         var vm = this;
 
         vm.filter = {};
-        //vm.stateparent = $state.$current.parent.self.name;
+        vm.stateparent = $state.$current.parent.self.name;
+        console.log("aqui");
+        console.log(vm.stateparent );
         //vm.filter.tipoentidad = $state.$current.parent.self.name;
         $scope.$on('handleBroadcast', function () {
             vm.getPage();
@@ -130,7 +132,7 @@
 
             GridExternal.getGrid(vm, columnsDefs, $scope, function () {
                 personalService.GetIndex(vm.filter).then(function (personales) {
-                
+
                     vm.gridOptions.totalItems = personales.total;
                     vm.gridOptions.data = personales.data;
                     $timeout(function () {
@@ -184,18 +186,18 @@
 
     }
 
-    newPersonalCtrl.$inject = ['$scope', '$state', 'personalService', 'ubigeoService','GridInternoTurno', 'Notification'];
-    function newPersonalCtrl($scope, $state, personalService, ubigeoService, GridInternoTurno, Notification) {
+    newPersonalCtrl.$inject = ['$scope', '$state', 'personalService'];
+    function newPersonalCtrl($scope, $state, personalService) {
         var vm = this;
 
         vm.stateparent = $state.$current.parent.self.name;
-        vm.entidadespecialidad = [];
+        /*vm.entidadespecialidad = [];
         vm.entidadsede = [];
-        vm.entidadturno = [];
+        vm.entidadturno = [];*/
         vm.entidad = {};
         vm.edicion = false;
 
-        vm.descripcion = '';
+        /*vm.descripcion = '';
         switch (vm.stateparent) {
             case 'personal':
                 vm.descripcion = 'Registrarlo como personal';
@@ -218,7 +220,7 @@
                 vm.requiredNombre = false;
                 break;
             default:
-        }
+        }*/
 
         vm.iddocumentoChange = function () {
             if (vm.entidad.iddocumento === 1 || vm.entidad.iddocumento === 3) {
@@ -233,7 +235,7 @@
             }
         };
 
-        vm.validacionDocumento = {};
+        /*vm.validacionDocumento = {};*/
         vm.getDocumento = function () {
             if ($scope.miForm.numerodoc.$valid) {
                 entidadService.GetNumero({numerodoc: vm.entidad.numerodoc, tipoentidad: vm.stateparent}).then(function (entidades) {
@@ -283,7 +285,7 @@
             });
         };
 
-        GridInternoTurno.getGrid(vm, $scope);
+        /*GridInternoTurno.getGrid(vm, $scope);
 
         entidadService.GetNew({tipoentidad: vm.stateparent}).then(function (entidades) {
             vm.others = entidades.others;
@@ -352,7 +354,7 @@
             });
             //console.log(vm.miTurno.data);
             vm.entidadturno = {};
-        }
+        }*/
 
         vm.save = function () {
 

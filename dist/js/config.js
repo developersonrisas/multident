@@ -107,13 +107,15 @@ angular.module('adminLTEConfig', ['ui-notification'])
                 })
 
                 .state('personal', {
+                    abstract: true,
                     url: '/personal',
                     templateUrl: 'views/modulos/personal.html',
                     data: {
                         pageTitle: 'Personal',
                         pageHeader: {
-                            title: 'Personal Administrativo',
-                            subtitle: ''
+                            icon: 'fa fa-user',
+                            title: 'Personal',
+                            subtitle: 'Gestión de personal'
                         },
                         breadcrumbs: [
                             {title: 'Personal'}, {title: 'Administrativos'}
@@ -128,7 +130,8 @@ angular.module('adminLTEConfig', ['ui-notification'])
                                             {
                                                 name: 'adminLTEApp.personal',
                                                 files: [
-                                                    'dist/js/appServices/personal.services.js',
+                                                    'dist/js/appServices/personal.services.js',                                                   
+                                                    'dist/js/appServices/ubigeo.services.js',
                                                     'dist/js/appControllers/personal.js'
                                                     
                                                 ]
@@ -137,6 +140,17 @@ angular.module('adminLTEConfig', ['ui-notification'])
                                         );
                             }]
                     }
+                })
+                .state('personal.list', {url: '', template: ''})
+                .state('personal.edit', {
+                    url: '/editar/:personalId',
+                    templateUrl: 'views/modulos/personal-form.html',
+                    controller: 'editEntidadCtrl as vm'
+                })
+                .state('personal.new', {
+                    url: '/nuevo',
+                    templateUrl: 'views/modulos/personal-form.html',
+                    controller: 'newPersonalCtrl as vm'
                 })
 
                 // PARA PACIENTES

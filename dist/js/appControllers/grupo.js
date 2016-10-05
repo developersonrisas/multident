@@ -109,7 +109,7 @@
 
             GridExternal.getGrid(vm, columnsDefs, $scope, function () {
                 grupoService.GetIndex(vm.filter).then(function (grupos) {
-                
+                    console.log(grupos);
                     vm.gridOptions.totalItems = grupos.total;
                     vm.gridOptions.data = grupos.data;
                     $timeout(function () {

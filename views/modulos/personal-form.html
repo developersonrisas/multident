@@ -1,78 +1,13 @@
-<script type="text/ng-template" id="myModalContacto.html">  
-<form name="miForm" ng-submit="save();" novalidate>
-    <div class="modal-header">
-        <h3 class="modal-title">Contacto</h3>
-    </div>
-    <div class="modal-body" ng-if = "accion"> 
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                ¿Seguro de eliminar: {{contacto.contacto}} ?
-            </div>
-        </div>
-    </div> 
-    <div class="modal-body" ng-if = "!accion"> 
-        <div class="row">
-            <div class="form-group col-xs-12 col-md-12">
-                <label>Contacto: <span class="asterisk">*</span></label>                        
-                <input type="text" name="contacto" class="form-control input-sm" maxlength="100" ng-model="contacto.contacto" required> 
-                <div ng-messages="miForm.contacto.$error" class="required" role="alert" ng-show="miForm.contacto.$dirty">
-                    <div ng-message="required">El campo es requerido</div>
-                </div>
-            </div>
-        </div>        
-        <div class="row">
-            <div class="form-group col-xs-12 col-md-12">
-                <label>Tel&eacute;fono:</label>                        
-                <input type="text" name="telefono" ng-model="contacto.telefono" class="form-control input-sm mb-5" ng-minlength="9" maxlength="9"/>
-                <div ng-messages="miForm.telefono.$error" class="required" role="alert" ng-show="miForm.telefono.$dirty">                                            
-                    <div ng-message="minlength">Debe ser 9 d&iacute;gitos</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-xs-12 col-md-12">
-                <label>M&oacute;vil:</label>                        
-                <input type="text" name="celular" ng-model="contacto.celular" class="form-control input-sm mb-5" ng-minlength="9" maxlength="9"/>
-                <div ng-messages="miForm.celular.$error" class="required" role="alert" ng-show="miForm.celular.$dirty">                                            
-                    <div ng-message="minlength">Debe ser 9 d&iacute;gitos</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-xs-12 col-md-12">
-                <label>Email:</label>                        
-                <input type="email" name="correo" ng-model="contacto.email" class="form-control input-sm mb-5" maxlength="50" />
-                <div ng-messages="miForm.correo.$error" class="required" role="alert">
-                    <div ng-message="email">Correo formato inv&aacute;lido</div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-xs-12 col-md-12">  
-                <label>Descripcion:</label> 
-                <textarea class="form-control" rows="5" ng-model="contacto.descripcion"></textarea>
-            </div>
-        </div>                 
-    </div>
-    <div class="modal-footer">            
-        <button class="btn btn-primary" ng-disabled="miForm.$invalid || miForm.$submitted">
-            <span ng-if = "accion">Si, eliminar</span>
-            <span ng-if = "!accion">Guardar</span>        
-        </button>    
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
-    </div>
-</form>
-</script>
 <div class="row">             
     <div class="col-md-12"> 
-        <form name="miForm" ng-submit="vm.save();" novalidate>
+        <form name="miForm" ng-submit="vm.save();" novalidate class="ml-sm mr-sm">
             <div class="panel rounded shadow no-margin">            
                 <div class="panel-heading">
                     <div class="pull-left">         
                         <a  ui-sref="{{vm.stateparent}}.list" class="btn btn-danger btn-sm"><i class="fa fa-reply"></i> Volver</a>
                     </div>
                     <div class="pull-right">                        
-                        <button class="btn btn-theme btn-sm" ng-disabled="miForm.$invalid || miForm.$submitted"><i class="fa fa-floppy-o"></i> Grabar</button>
+                        <button class="btn btn-success btn-sm" ng-disabled="miForm.$invalid || miForm.$submitted"><i class="fa fa-floppy-o"></i> Grabar</button>
                     </div>
                     <div class="clearfix"></div>
                 </div>     
@@ -92,52 +27,6 @@
                                 </div>
                             </a>
                         </li>                        
-                        <li ng-if="vm.stateparent == 'medico'">
-                            <a href="#tab1-2" data-toggle="tab">
-                                <i class="fa fa-user-md"></i>
-                                <div>
-                                    <span class="text-strong">Médico</span>
-                                    <span>Especialidades</span>
-                                </div> 
-                            </a>
-                        </li>
-
-                        <li ng-if="vm.stateparent == 'cliente'">
-                            <a href="#tab1-3" data-toggle="tab">
-                                <i class="fa fa-female"></i>
-                                <div>
-                                    <span class="text-strong">Paciente</span>
-                                    <span>Ficha</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li ng-if="vm.stateparent == 'personal'">
-                            <a href="#tab1-4" data-toggle="tab">
-                                <i class="fa fa-user"></i>
-                                <div>
-                                    <span class="text-strong">Personal</span>
-                                    <span>Recursos humanos</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li ng-if="vm.stateparent == 'proveedor' && vm.edicion">
-                            <a href="#tab1-5" data-toggle="tab">
-                                <i class="fa fa-user"></i>
-                                <div>
-                                    <span class="text-strong">Proveedor</span>
-                                    <span>Contactos</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li ng-if="vm.stateparent == 'medico'">
-                            <a href="#tab1-6" data-toggle="tab">
-                                <i class="fa fa-calendar"></i>
-                                <div>
-                                    <span class="text-strong">Médico</span>
-                                    <span>Turnos</span>
-                                </div> 
-                            </a>
-                        </li>
 
                     </ul>
                 </div><!-- /.panel-heading -->
@@ -149,10 +38,10 @@
                         <div class="tab-pane fade in active" id="tab1-1"> 
                             <h4>Datos generales</h4>
                             <div class="row">
-                                <div class="col-md-12">                        
+                                <div class="col-md-12 pb-sm">                        
                                     <label class="col-sm-2 col-xs-6 control-label">Tipo documento: <span class="asterisk">*</span></label>
                                     <div class="col-sm-4 col-xs-6">   
-                                        <select ng-model="vm.entidad.iddocumento" ng-options="item.iddocumento as item.abreviatura for item in vm.others.documentos" name="iddocumento" class="form-control input-sm mb-5" required ng-change="vm.iddocumentoChange()" ng-disabled="vm.edicion">                                        
+                                        <select ng-model="vm.entidad.iddocumento" name="iddocumento" class="form-control input-sm" required  ng-disabled="vm.edicion">                                        
                                         </select>                                    
                                         <div ng-messages="miForm.iddocumento.$error" class="required" role="alert" ng-show="miForm.iddocumento.$dirty">
                                             <div ng-message="required">El campo es requerido</div>
@@ -180,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="row" ng-show="vm.requiredNombre">
-                                <div class="col-md-12">                                        
+                                <div class="col-md-12 pb-sm">                                        
                                     <label class="col-sm-2 col-xs-6 control-label">Apellido paterno: <span class="asterisk">*</span></label> 
                                     <div class="col-sm-4 col-xs-6"> 
                                         <input type="text" name="apellidopat" ng-model="vm.entidad.apellidopat" class="form-control input-sm mb-5" maxlength="50" ng-required="vm.requiredNombre" />                                    
@@ -195,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">                                        
+                                <div class="col-md-12 pb-sm">                                        
                                     <label class="col-sm-2 col-xs-6 control-label" ng-show="vm.requiredNombre">Nombre(s): <span class="asterisk">*</span></label> 
                                     <div class="col-sm-4 col-xs-6" ng-show="vm.requiredNombre">
                                         <input type="text" name="nombre" ng-model="vm.entidad.nombre" class="form-control input-sm mb-5" maxlength="50" ng-required="vm.requiredNombre" />                                    
@@ -213,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="row" ng-show="vm.requiredNombre">
-                                <div class="col-md-12">                                                                                                            
+                                <div class="col-md-12 pb-sm">                                                                                                            
                                     <label class="col-sm-2 col-xs-6 control-label">Fecha nacimiento:</label> 
                                     <div class="col-sm-4 col-xs-6">
                                         <input data-input-mask type="text" name="fechanacimiento" ng-model="vm.entidad.fechanacimiento" maxlength="10" class="form-control input-sm mb-5" data-inputmask="'alias': 'dd/mm/yyyy'" />
@@ -235,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">  
+                                <div class="col-md-12 pb-sm">  
                                     <label class="col-sm-2 col-xs-6 control-label">Teléfono:</label> 
                                     <div class="col-sm-4 col-xs-6">
                                         <input type="text" name="telefono" ng-model="vm.entidad.telefono" class="form-control input-sm mb-5" ng-minlength="9" maxlength="9"/>
@@ -254,17 +143,17 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">                                        
+                                <div class="col-md-12 pb-sm">                                        
                                     <label class="col-sm-2 col-xs-6 control-label">Correo electr&oacute;nico:</label>                             
                                     <div class="col-sm-4 col-xs-6"> 
                                         <input type="email" name="correo" ng-model="vm.entidad.email" class="form-control input-sm mb-5" maxlength="50" />
-                                        <div ng-messages="miForm.correo.$error" class="required" role="alert">
+                                        <div ng-messages="miForm.correo.$error" class="required" role="alert" ng-show="miForm.correo.$dirty">
                                             <div ng-message="email">Correo formato inv&aacute;lido</div>
                                         </div>
                                     </div> 
                                     <label ng-if="vm.stateparent == 'personal' || vm.stateparent == 'medico'" class="col-sm-2 col-xs-6 control-label">Cargo desempeño:</label>                             
                                     <div ng-if="vm.stateparent == 'personal' || vm.stateparent == 'medico'" class="col-sm-4 col-xs-6"> 
-                                        <select ng-model="vm.entidad.idcargoorg" ng-options="item.idcargoorg as item.nombre for item in vm.others.cargosorg" name="iddocumento" class="form-control input-sm mb-5">
+                                        <select ng-model="vm.entidad.idcargoorg" class="form-control input-sm mb-5">
                                             <option value="">-- Seleccione --</option>
                                         </select>
                                     </div> 
@@ -272,33 +161,33 @@
                             </div> 
                             <h4 class="mt-10">Direcci&oacute;n</h4>
                             <div class="row">
-                                <div class="col-md-12">                                        
+                                <div class="col-md-12 pb-sm">                                        
                                     <label class="col-sm-2 col-xs-12 control-label">Pa&iacute;s/Prov./Poblaci&oacute;n:</label>                             
                                     <div class="col-sm-3 col-xs-4">  
-                                        <select name="pais"  ng-model="vm.entidad.pais" ng-options="item.pais as item.nombre for item in vm.others.paises" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais || ''}, 'departamentos')">
+                                        <select name="pais"  ng-model="vm.entidad.pais" class="form-control input-sm mb-5">
                                             <option value="">-- Pa&iacute;s --</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-4 col-xs-4">  
-                                        <select name="departamento" ng-model="vm.entidad.dpto" ng-options="item.dpto as item.nombre for item in vm.others.departamentos" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais, dpto: vm.entidad.dpto || ''}, 'provincias')" >                                            
+                                        <select name="departamento" ng-model="vm.entidad.dpto" class="form-control input-sm mb-5" >                                            
                                             <option value="">-- Provincia --</option>
                                         </select>
                                     </div> 
                                     <div class="col-sm-3 col-xs-4">  
                                         <!--<select name="provincia" ng-model="vm.entidad.prov"  ng-options="item.prov as item.nombre for item in vm.others.provincias" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais, dpto: vm.entidad.dpto || '', prov: vm.entidad.prov || ''}, 'distritos')">-->                                            
-                                        <select name="provincia" ng-model="vm.entidad.prov"  ng-options="item.prov as item.nombre for item in vm.others.provincias" class="form-control input-sm mb-5">
+                                        <select name="provincia" ng-model="vm.entidad.prov"  class="form-control input-sm mb-5">
                                             <option value="">-- Poblaci&oacute;n --</option>
                                         </select>
                                     </div> 
                                     <div class="col-sm-3 col-xs-4" ng-hide="true" >  
-                                        <select name="distrito" ng-model="vm.entidad.dist" ng-options="item.dist as item.nombre for item in vm.others.distritos" class="form-control input-sm mb-5">
+                                        <select name="distrito" ng-model="vm.entidad.dist" class="form-control input-sm mb-5">
                                             <option value="">-- Distrito --</option>
                                         </select>
                                     </div>                                     
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">                                        
+                                <div class="col-md-12 pb-sm">                                        
                                     <label class="col-sm-2 col-xs-12 control-label">Direcci&oacute;n:</label>                             
                                     <div class="col-sm-2 col-xs-12">                                         
                                         <input type="text" name="codigopostal" ng-model="vm.entidad.codigopostal" placeholder="C&oacute;digo postal" class="form-control input-sm mb-5" ng-minlength="5" maxlength="5"/>
@@ -313,7 +202,7 @@
                             </div> 
                             <h4 class="mt-10">Internet</h4>
                             <div class="row">
-                                <div class="col-md-12">  
+                                <div class="col-md-12 pb-sm">  
                                     <label class="col-sm-2 col-xs-6 control-label">Facebook: <i class="fa fa-facebook-official"></i></label> 
                                     <div class="col-sm-4 col-xs-6">
                                         <input type="text" name="facebook" ng-model="vm.entidad.facebook" class="form-control input-sm mb-5" maxlength="50"/>
@@ -323,7 +212,7 @@
                                         <input type="text" name="twitter" ng-model="vm.entidad.twitter" class="form-control input-sm mb-5" maxlength="50"/>
                                     </div> 
                                 </div>
-                                <div class="col-md-12">  
+                                <div class="col-md-12 pb-sm">  
                                     <label class="col-sm-2 col-xs-6 control-label">Página web: <i class="fa fa-chrome"></i> </label> 
                                     <div class="col-sm-4 col-xs-6">
                                         <input type="text" name="paginaweb"  ng-model="vm.entidad.paginaweb" class="form-control input-sm mb-5" maxlength="100"/>
@@ -336,249 +225,7 @@
                             </div>                                                        
                         </div>
 
-                        <!-- PANEL 2-->
-                        <div class="tab-pane fade" id="tab1-2">
-                            <h4>Colegiatura</h4>
-                            <div class="row">
-                                <div class="col-md-12">  
-                                    <label class="col-sm-2 col-xs-6 control-label">R.N.E.:</label> 
-                                    <div class="col-sm-4 col-xs-6">
-                                        <input type="text" ng-model="vm.medico.rne" class="form-control input-sm mb-5" maxlength="20"/>
-                                    </div> 
-                                    <label class="col-sm-2 col-xs-6 control-label">Número colegiatura:</label> 
-                                    <div class="col-sm-4 col-xs-6">
-                                        <input type="text" ng-model="vm.medico.colegiatura" class="form-control input-sm mb-5" maxlength="20"/>
-                                    </div> 
-                                </div>
-                            </div>
 
-                            <h4 class="mt-10">Especialidades</h4>
-                            <div class="row">
-                                <div class="col-md-12">                            
-                                    <label class="col-sm-2 col-xs-12 control-label">Seleccione las especialidades del m&eacute;dico:</label>
-                                    <div class="col-sm-10 col-xs-12">                                            
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;"></th>
-                                                    <th style="width: 100px;"><strong>Tipo</strong></th>
-                                                    <th><strong>Especialidad m&eacute;dica</strong></th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>                                                
-                                                <tr data-ng-repeat="item in vm.others.especialidades" >      
-                                                    <td class="text-center" style="width: 50px;">                                                                                                                
-                                                        <div class="ckbox ckbox-default rounded">
-                                                            <input id="checkbox-type-rounded-e{{item.idespecialidad}}" type="checkbox" data-checklist-model="vm.entidadespecialidad" data-checklist-value="{idespecialidad: item.idespecialidad, nombre: item.nombre}">
-                                                            <label for="checkbox-type-rounded-e{{item.idespecialidad}}"></label>
-                                                        </div>                                                  
-                                                    </td>
-                                                    <td>{{item.tipo}}</td>
-                                                    <td>{{item.nombre}}</td>                                                    
-                                                </tr> 
-                                            </tbody>
-                                        </table> 
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PANEL 3-->
-                        <div class="tab-pane fade" id="tab1-3">
-                            <h4>Datos a posterior</h4>
-                            <div class="row">
-                                <div class="col-md-12">                                   
-                                                                                                       
-                                </div>
-                            </div>                        
-                        </div> 
-
-                        <!-- PANEL 4-->
-                        <div class="tab-pane fade" id="tab1-4">
-                            <h4>Sedes</h4>
-                            <div class="row">
-                                <div class="col-md-12">                            
-                                    <label class="col-sm-2 col-xs-12 control-label">Seleccione las sedes donde labora:</label>
-                                    <div class="col-sm-10 col-xs-12">  
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;"></th>
-                                                    <th style="width: 200px;"><strong>Sede </strong></th>
-                                                    <th><strong>Direcci&oacute;n</strong></th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>                                                
-                                                <tr data-ng-repeat="item in vm.others.sedes" >      
-                                                    <td class="text-center" style="width: 50px;">                                                                                                                
-                                                        <div class="ckbox ckbox-default rounded">
-                                                            <input id="checkbox-type-rounded-s{{item.idsede}}" type="checkbox" data-checklist-model="vm.entidadsede" data-checklist-value="{idsede: item.idsede, nombre: item.nombre}">
-                                                            <label for="checkbox-type-rounded-s{{item.idsede}}"></label>
-                                                        </div>                                                    
-                                                    </td>
-                                                    <td>{{item.nombre}}</td>
-                                                    <td>{{item.direccion}}</td>                                                    
-                                                </tr>
-                                            </tbody>
-                                        </table> 
-
-                                    </div> 
-                                </div>
-                            </div>
-                            <h4 class="mt-15">Configuración en el sistema</h4>
-                            <div class="row">
-                                <div class="col-md-12">                            
-                                    <label class="col-sm-2 col-xs-6 control-label">Usuario:</label>
-                                    <div class="col-sm-10 col-xs-6">                                            
-                                        {{vm.entidad.numerodoc}}
-                                    </div> 
-                                </div>
-                            </div>
-                             
-                            <div class="row">
-                                <div class="col-md-12">                            
-                                    <label class="col-sm-2 col-xs-6 control-label">Permitir acceso:</label>
-                                    <div class="col-sm-4 col-xs-6">                                          
-                                        <div class="rdio rdio-theme circle radio-inline" >
-                                            <input id="radio-type-accesosi" type="radio" ng-model="vm.entidad.acceso" value="1">
-                                            <label for="radio-type-accesosi">Si</label>
-                                        </div>
-                                        <div class="rdio rdio-theme circle radio-inline">
-                                            <input id="radio-type-accesono" type="radio" ng-model="vm.entidad.acceso" value="0">
-                                            <label for="radio-type-accesono">No</label>
-                                        </div>                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">                            
-                                    <label class="col-sm-2 col-xs-6 control-label">Perfil en sistema:</label>
-                                    <div class="col-sm-4 col-xs-6">                                            
-                                        <select ng-model="vm.entidad.idperfil"  ng-options="item.idperfil as item.nombre for item in vm.others.perfiles" class="form-control input-sm mb-5">                        
-                                            <option value="">-- Elige opci&oacute;n --</option>
-                                        </select>
-                                    </div>                                    
-                                </div>
-                            </div>
-                        </div>   
-                        <!-- PANEL 5-->
-                        <div class="tab-pane fade" id="tab1-5">
-                            <h4>Contactos</h4>
-                            <div class="row">
-                                <div class="col-md-12"> 
-                                    <div class="pull-left mb-5">Información de contactos con el proveedor.</div>
-                                    <div class="pull-right mb-5">
-                                        <a href="#" class="btn btn-primary btn-xs" ng-click="vm.openModal('new', {})"><i class="fa fa-plus"></i> Nuevo contacto</a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">                                      
-                                    <table class="table table-striped table-theme">
-                                        <thead>
-                                            <tr>
-                                                <th width="30%"><strong>Contacto</strong></th>                                                
-                                                <th width="12%"><strong>Tel&eacute;fono</strong></th>
-                                                <th width="12%"><strong>Celular</strong></th>
-                                                <th width="17%" class="hidden-xs " ><strong>Email</strong></th> 
-                                                <th width="17%" class="hidden-xs"><strong>Descripci&oacute;n</strong></th> 
-                                                <th width="12%"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="item in vm.others.contactos" >      
-                                                <td>{{item.contacto}}</td>
-                                                <td>{{item.telefono}}</td>
-                                                <td>{{item.celular}}</td>
-                                                <td class="hidden-xs">{{item.email}}</td>
-                                                <td class="hidden-xs">{{item.descripcion}}</td>  
-                                                <td class="text-center">     
-                                                    <div class="btn-group">
-                                                        <a href="#" class="btn btn-primary btn-xs" tooltip-placement="top" uib-tooltip="Editar" ng-click="vm.openModal('edit', item);"><i class="fa fa-pencil"></i></a>
-                                                        <a href="#" class="btn btn-danger btn-xs" tooltip-placement="top" uib-tooltip="Eliminar" ng-click="vm.openModal('delete', item);"><i class="fa fa-trash-o"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr> 
-                                            <tr data-ng-show="vm.others.contactos.length === 0">  
-                                                <td colspan="6" class="text-center">No hay contactos.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                </div>
-                            </div> 
-                        </div>
-
-                        <!-- PANEL 6-->
-                        <div class="tab-pane fade" id="tab1-6">
-                            
-                            <div class="row">
-                                <h4 class="col-md-2 mt-0 mb-0">Turnos</h4>
-                                <div class="col-md-10">
-                                    <label class="col-sm-12 col-xs-12 col-md-12 control-label">Seleccione los turnos del médico:</label>
-                                </div>
-                            </div>
-                            <div class="row mt-10" style="border-top: 1px solid #e5e5e5;">
-                                <div class="col-md-3">
-                                    <div class="row "> 
-                                        <div class="col-md-12 form-group mb-md">
-                                            <label class="control-label mb-xs"> DIAS </label> 
-                                            <select style="height: 137px;" multiple id="temporalHorario" ng-model="vm.entidadturno.iddia" class="form-control input-sm" ng-options="item as item.nombre_dia for item in vm.others.dias">  </select>
-                                        </div>
-                                        <div class="col-md-12 form-group mb-md"> 
-                                            <div class="row mb-0"> 
-                                                <label class="col-md-12 mb-0"><strong>Mañana :</strong></label>
-                                                <div class="col-md-6 mb-0">
-                                                    <label class="control-label mb-0">Desde :</label>
-                                                    <select id="horainicio1" class="form-control input-sm" ng-model="vm.entidadturno.idhoraini1" ng-options="item as item.nombre_hora for item in vm.others.horas1">
-                                                         
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-md-6 mb-0">
-                                                    <label class="control-label mb-0">Hasta :</label>
-                                                    <select id="horafinal1" class="form-control input-sm" ng-model="vm.entidadturno.idhorafin1" ng-options="item as item.nombre_hora for item in vm.others.horas1">
-                                                         
-                                                    </select>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row mb-0"> 
-                                                <label class="col-md-12 mb-0"><strong>Tarde :</strong></label>
-                                                <div class="col-md-6 mb-0">
-                                                    <label class="control-label mb-0">Desde :</label>
-                                                    <select id="horainicio2" class="form-control input-sm" ng-model="vm.entidadturno.idhoraini2" ng-options="item as item.nombre_hora for item in vm.others.horas2">
-                                                         
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-md-6 mb-0">
-                                                    <label class="control-label mb-0">Hasta :</label>
-                                                    <select id="horafinal2" class="form-control input-sm" ng-model="vm.entidadturno.idhorafin2" ng-options="item as item.nombre_hora for item in vm.others.horas2">
-                                                         
-                                                    </select>
-                                                </div>
-
-                                            </div>
-                                            <div class="row "> 
-                                                <div class="col-xs-12 form-group m-n"> 
-                                                    <button tooltip="AGREGAR AL HORARIO" type="button" class="btn btn-primary full-block m-n" style="margin-top: 15px;width: 100%;" ng-click="vm.agregarHorarioItem(); $event.preventDefault();" > <i class="fa fa-plus"></i> AGREGAR AL HORARIO </button> 
-                                                            
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-xs-9 mt-10" style="border-top: 1px solid #e5e5e5;">
-                                    <div ui-grid="vm.miTurno" ui-grid-auto-resize ui-grid-resize-columns class="grid table-responsive fs-mini-grid" style="height:300px;">
-                                    </div>
-                                </div>                               
-                            </div>
-                        </div>
 
                     </div>
                 </div><!-- /.panel-body -->
