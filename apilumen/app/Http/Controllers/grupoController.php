@@ -160,6 +160,28 @@ class grupoController extends Controller
         return $this->crearRespuestaError('Grupo no encotrado', 404);
     }
 
+    public function rolesNoAgregados(Request $request) {
+
+        $grupo = new grupo();
+
+        $paramsTMP = $request->all();
+        $data = $grupo->roles_no_agregados($paramsTMP);
+
+        return $this->crearRespuesta($data, 200, count($data));
+        
+    }
+
+    public function rolesAgregados(Request $request) {
+
+       $grupo = new grupo();
+
+        $paramsTMP = $request->all();
+
+        $data = $grupo->roles_agregados($paramsTMP);
+
+        return $this->crearRespuesta($data, 200, count($data));
+        
+    }
 }
 
 

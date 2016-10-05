@@ -14,7 +14,9 @@
         service.GetNew = GetNew;
         service.Create = Create;
         service.Update = Update;
-        service.Delete = Delete;        
+        service.Delete = Delete;  
+        service.RolesNoAgregados = RolesNoAgregados; 
+        service.RolesAgregados = RolesAgregados;        
         return service; 
         
         //Grid
@@ -46,6 +48,17 @@
         function Delete(id, request) {
             return $http.post($rootScope.api + '/grupo/delete/' + id,  request).then(handleSuccess, handleError('Error deleting user'));
         }
+
+        //Para mostrar roles no agregados
+        function RolesNoAgregados(request) {
+            return $http.get($rootScope.api + '/grupo/rolesNoAgregados', {params: request}).then(handleSuccess, handleError('Error deleting user'));
+        }
+
+        //Para mostrar roles agregados
+        function RolesAgregados(request) {
+            return $http.get($rootScope.api + '/grupo/rolesAgregados', {params: request}).then(handleSuccess, handleError('Error deleting user'));
+        }
+
         
         // private functions
         function handleSuccess(res) { 

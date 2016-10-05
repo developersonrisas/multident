@@ -21,8 +21,14 @@ use App\Models\entidad;
 Route::get('/personal', 'personalController@index');
 
 // GRUPO
+Route::get('/grupo/rolesAgregados', 'grupoController@rolesAgregados');
+Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');
+
 Route::get('/grupo', 'grupoController@index');
 Route::get('/grupo/{id}', 'grupoController@show');
+//Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');
+
+
 Route::post('/grupo', 'grupoController@store');
 Route::post('/grupo/{id}', 'grupoController@update');
 Route::post('/grupo/delete/{id}', 'grupoController@destroy');
@@ -36,6 +42,18 @@ Route::get('/rol/{id}', 'rolController@show');
 Route::post('/rol/{id}', 'rolController@update');
 Route::post('/rol/delete/{id}', 'rolController@destroy');
 // FIN DE ROLES	
+
+// GRUPO_ROLES	
+Route::get('/grupoRol', 'gruporolController@index');
+Route::get('/grupoRol/new', 'gruporolController@newrol');
+Route::post('/grupoRol', 'gruporolController@store');
+Route::get('/grupoRol/{id}', 'gruporolController@show');
+Route::post('/grupoRol/{id}', 'gruporolController@update');
+Route::post('/grupoRol/delete/{id}', 'gruporolController@destroy');
+// FIN DE GRUPO_ROLES	
+
+
+
 
 // USUARIOS	
 Route::get('/usuario', 'usuarioController@index');
@@ -57,3 +75,29 @@ Route::get('/paciente', 'pacienteController@index');
 // ODONTOLOGOS		
 Route::get('/odontologo', 'odontologoController@index');
 // FIN DE ODONTOLOGOS		
+
+
+// CARGOS	
+Route::get('/cargo', 'cargoController@index');
+Route::get('/cargo/{id}', 'cargoController@show');
+Route::post('/cargo', 'cargoController@store');
+Route::post('/cargo/{id}', 'cargoController@update');
+Route::post('/cargo/delete/{id}', 'cargoController@destroy');
+// FIN DE CARGOS	
+
+
+// MONEDAS	
+Route::get('/moneda', 'monedaController@index');
+Route::get('/moneda/{id}', 'monedaController@show');
+Route::post('/moneda', 'monedaController@store');
+Route::post('/moneda/{id}', 'monedaController@update');
+Route::post('/moneda/delete/{id}', 'monedaController@destroy');
+// FIN DE MONEDAS	
+
+// TIPO DE CAMBIO		
+Route::get('/tipoCambio', 'tipoCambioController@index');
+Route::get('/tipoCambio/{id}', 'tipoCambioController@show');
+Route::post('/tipoCambio', 'tipoCambioController@store');
+Route::post('/tipoCambio/{id}', 'tipoCambioController@update');
+Route::post('/tipoCambio/delete/{id}', 'tipoCambioController@destroy');
+// FIN DE TIPO DE CAMBIO		
