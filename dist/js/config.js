@@ -571,6 +571,142 @@ angular.module('adminLTEConfig', ['ui-notification'])
                 })
                 // FIN DE MODULOS
 
+                // PARA CARGOS
+                .state('cargo', {
+                    abstract: true,
+                    url: '/cargo',
+                    templateUrl: 'views/modulos/cargo.html',
+                    data: {
+                        pageTitle: 'Cargos',
+                        pageHeader: {
+                            icono: 'fa fa-graduation-cap',
+                            title: 'Gestión de Cargos',
+                            subtitle: ''
+                        },
+                        breadcrumbs: [
+                            {title: 'Seguridad'}, {title: 'Cargos'}
+                        ]
+                    },
+                    controller: 'listCargoCtrl as vm',
+                    resolve: {
+                        deps: ['$ocLazyLoad', 'settings', function ($ocLazyLoad, settings) {
+                                return $ocLazyLoad.load(
+                                        [
+                                            {
+                                                name: 'adminLTEApp.cargo',
+                                                files: [
+                                                    'dist/js/appServices/cargo.services.js',
+                                                    'dist/js/appControllers/cargo.js'
+                                                    
+                                                ]
+                                            }
+                                        ]
+                                        );
+                            }]
+                    }
+                })
+                .state('cargo.list', {url: ''})
+                .state('cargo.edit', {
+                        url: '/editar/:cargoId',
+                        templateUrl: 'views/modulos/cargo-form.html',
+                        controller: 'editCargoCtrl as vm'
+                })
+                .state('cargo.new', {
+                        url: '/nuevo',
+                        templateUrl: 'views/modulos/cargo-form.html',
+                        controller: 'newCargoCtrl as vm'
+                })
+                // FIN DE CARGOS
+
+                // PARA MONEDAS
+                .state('moneda', {
+                    abstract: true,
+                    url: '/moneda',
+                    templateUrl: 'views/modulos/moneda.html',
+                    data: {
+                        pageTitle: 'Monedas',
+                        pageHeader: {
+                            icono: 'fa fa-money',
+                            title: 'Gestión de Monedas',
+                            subtitle: ''
+                        },
+                        breadcrumbs: [
+                            {title: 'Seguridad'}, {title: 'Monedas'}
+                        ]
+                    },
+                    controller: 'listMonedaCtrl as vm',
+                    resolve: {
+                        deps: ['$ocLazyLoad', 'settings', function ($ocLazyLoad, settings) {
+                                return $ocLazyLoad.load(
+                                        [
+                                            {
+                                                name: 'adminLTEApp.moneda',
+                                                files: [
+                                                    'dist/js/appServices/moneda.services.js',
+                                                    'dist/js/appControllers/moneda.js'
+                                                    
+                                                ]
+                                            }
+                                        ]
+                                        );
+                            }]
+                    }
+                })
+                .state('moneda.list', {url: ''})
+                .state('moneda.edit', {
+                        url: '/editar/:monedaId',
+                        templateUrl: 'views/modulos/moneda-form.html',
+                        controller: 'editMonedaCtrl as vm'
+                })
+                .state('moneda.new', {
+                        url: '/nuevo',
+                        templateUrl: 'views/modulos/moneda-form.html',
+                        controller: 'newMonedaCtrl as vm'
+                })
+                // FIN DE MONEDAS
+
+                // PARA TIPO DE CAMBIO
+                .state('tipocambio', {
+                    abstract: true,
+                    url: '/tipocambio',
+                    templateUrl: 'views/modulos/tipo-cambio.html',
+                    data: {
+                        pageTitle: 'Tipo de Cambio',
+                        pageHeader: {
+                            icono: 'fa fa-money',
+                            title: 'Lista de Tipos de Cambios',
+                            subtitle: ''
+                        },
+                        breadcrumbs: [
+                            {title: 'Seguridad'}, {title: 'Tipo de Cambio'}
+                        ]
+                    },
+                    controller: 'listTipocambioCtrl as vm',
+                    resolve: {
+                        deps: ['$ocLazyLoad', 'settings', function ($ocLazyLoad, settings) {
+                                return $ocLazyLoad.load(
+                                        [
+                                            {
+                                                name: 'adminLTEApp.tipocambio',
+                                                files: [
+                                                    'dist/js/appServices/tipo_cambio.services.js',
+                                                    'dist/js/appControllers/tipocambio.js'
+                                                    
+                                                ]
+                                            }
+                                        ]
+                                        );
+                            }]
+                    }
+                })
+                .state('tipocambio.list', {url: ''})
+                .state('tipocambio.new', {
+                        url: '/nuevo',
+                        templateUrl: 'views/modulos/tipo-cambio-form.html',
+                        controller: 'newTipocambioCtrl as vm'
+                })
+                // FIN DE TIPO DE CAMBIO
+
 
 
         })

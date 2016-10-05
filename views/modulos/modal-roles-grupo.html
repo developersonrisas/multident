@@ -1,7 +1,7 @@
 <style>
     .grid{ 
         width: 100%;
-        height: 480px;
+        height: 280px !important;
     }  
     .required{
         color: #F00;
@@ -14,7 +14,7 @@
 
 <div class="modal-header">
     <div class="modal-header">
-        <h3 class="modal-title"><i class="fa fa-cog"></i> Asignacion de Roles</h3>
+        <h3 class="modal-title"><i class="fa fa-cog"></i> Asignacion de Roles para <strong>{{grupo.nombre_grupo}}</strong></h3>
     </div>
     <div class="modal-body">
     <!-- -->
@@ -29,16 +29,12 @@
                     <div>
                         <div class="form-group has-feedback">
                             <label> Modulo:</label>
-                            <select ng-model="vm.rol.idmodulo" ng-options="item.idmodulo as item.nombre_modulo for item in vm.others.modulos" name="idmodulo" class="form-control input-sm mb-5" ng-required="vm.rol.idmodulo === 1">    
-                                <option value="">--- Todos ---</option>                                    
-                            </select>
-                            <div ng-messages="miForm.idmodulo.$error" class="required" role="alert" ng-show="   miForm.idmodulo.$dirty">
-                                <div ng-message="required">El campo es requerido</div>
-                            </div>  
+                            <select ng-model="vm.rol.idmodulo" ng-options="item.idmodulo as item.nombre_modulo for item in vm.listaModulos" name="idmodulo" ng-change="vm.loadRolesNoAgregados(vm.rol.idmodulo);" class="form-control input-sm mb-5" ng-required="vm.rol.idmodulo === 1">                                    
+                            </select> 
                         </div>
                     </div>
 
-                    <div ui-grid="vm.gridDemo" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid fs-mini-grid" style="background: #fff"></div>        
+                    <div ui-grid="vm.gridRoles" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid fs-mini-grid" style="background: #fff"></div>        
                 </div>
             </div>
         </div>
@@ -52,16 +48,12 @@
                     <div>
                         <div class="form-group has-feedback">
                             <label> Modulo:</label>
-                            <select ng-model="vm.rol.idmodulo" ng-options="item.idmodulo as item.nombre_modulo for item in vm.others.modulos" name="idmodulo" class="form-control input-sm mb-5" ng-required="vm.rol.idmodulo === 1">    
-                                <option value="">--- Todos ---</option>                                    
-                            </select>
-                            <div ng-messages="miForm.idmodulo.$error" class="required" role="alert" ng-show="   miForm.idmodulo.$dirty">
-                                <div ng-message="required">El campo es requerido</div>
-                            </div>  
+                            <select ng-model="vm.rol.idmoduloAdd" ng-options="item.idmodulo as item.nombre_modulo for item in vm.listaModulosAdd" name="idmoduloAdd" ng-change="vm.loadRolesAgregados(vm.rol.idmoduloAdd);" class="form-control input-sm mb-5" ng-required="vm.rol.idmodulo === 1">                                     
+                            </select>  
                         </div>
                     </div>
 
-                    <div ui-grid="vm.gridDemo" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid fs-mini-grid" style="background: #fff"></div>                 
+                    <div ui-grid="vm.gridRolesAdd" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid fs-mini-grid" style="background: #fff"></div>                 
                 </div>
             </div>
         </div>

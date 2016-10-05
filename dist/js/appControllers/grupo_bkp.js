@@ -182,7 +182,7 @@
 
             GridExternal.getGrid(vm, columnsDefs, $scope, function () {
                 grupoService.GetIndex(vm.filter).then(function (grupos) {
-                    console.log(grupos);
+                
                     vm.gridOptions.totalItems = grupos.total;
                     vm.gridOptions.data = grupos.data;
                     $timeout(function () {
@@ -201,7 +201,6 @@
                 templateUrl: 'myModalContent.html',
                 controller: 'modalGrupoInstanceCtrl',
                 windowClass: 'modal-primary',
-                scope : $scope,
                 size: 'sm',
                 resolve: {
                     modalParam: function () {
@@ -385,12 +384,12 @@
                 idgrupo: modalParam.data.idgrupo,
                 idmodulo : idmodulo
             };
-            //var accion = '<button type="button" class="btn btn-primary btn-xs" ng-click="grid.appScope.btnAgregarRolesAGrupo();"> Asignar</button>';
+            var accion = '<button type="button" class="btn btn-primary btn-xs" ng-click="btnAgregarRolesAGrupo();"> Asignar</button>';
             var columnsDefs = [
                 {name: 'Item', field: 'idrol', width: '60'},
                 {name: 'Icono', field: 'icono', width: '60', cellTemplate:'<div class="text-center"><i style="font-size:18px;margin-top: 7px;" class="{{ COL_FIELD }} " ></i></div>'},
                 {name: 'Nombre', field: 'nombre_rol', width: '150'},
-                {name: 'Accion', field: 'descripcion', maxwidth: '100', cellClass: 'text-center', cellTemplate: '<a class="btn btn-primary btn-xs" ng-click="grid.appScope.btnAgregarRolesAGrupo();">Seleccionar</a>'}
+                {name: 'Accion', field: 'descripcion', maxwidth: '100', cellClass: 'text-center', cellTemplate: accion, enableCellEdit: false},
             ];
 
             GridNoAgregados.getGrid(vm, columnsDefs, $scope, function () {
@@ -442,9 +441,9 @@
 
         // -------------------------------
         // para agregar un rol al grupo
-        vm.btnAgregarRolesAGrupo = function(){
+        $scope.btnAgregarRolesAGrupo = function(){
             alert("llego");
-        };
+        }
         
 
 
