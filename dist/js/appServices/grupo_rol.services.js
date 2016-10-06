@@ -44,7 +44,7 @@
         
         //Eliminar
         function Delete(id, request) {
-            return $http.post($rootScope.api + '/grupoRol/delete/' + id,  request).then(handleSuccess, handleError('Error deleting user'));
+            return $http.post($rootScope.api + '/grupoRol/delete/'+ id ,  request).then(handleSuccess, handleError('Error deleting user'));
         }
         
         // private functions

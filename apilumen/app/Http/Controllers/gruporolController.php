@@ -37,17 +37,34 @@ class gruporolController extends Controller
         $datos = [];
 
         //VALIDACIONES EN LA BD
-        $idGrupo = $request['grupo_rol']['idgrupo'];
-        $idRol = $request['grupo_rol']['idrol'];
+        $idGrupo = $request['idgrupo'];
+        $idRol = $request['idrol'];
 
-        $tmp = grupo_rol::where('idgrupo', '=', $idGrupo)->where('idrol', '=', $idrol)->first();
-        if ($tmp) {
+        $gruporol = grupo_rol::where('idgrupo', '=', $idGrupo)->where('idrol', '=', $idRol)->first();
+        if ($gruporol) {
             $datos = [
                 'estado_gruporol' => '1'
             ];
             \DB::beginTransaction();
             try {
-                $grupo_rol->update($datos,$tmp->idgruporol);
+                $gruporol->update($datos,$gruporol->idgruporol);
+
+            } catch (QueryException $e) {
+                \DB::rollback();
+            }
+            \DB::commit();
+            
+        }else{
+
+            $datos = [
+                'idgrupo' => $idGrupo,
+                'idrol' => $idRol,
+                'estado_gruporol' => '1'
+            ];
+
+            \DB::beginTransaction();
+            try {
+                $grupo_rol = grupo_rol::create($datos);
 
             } catch (QueryException $e) {
                 \DB::rollback();
@@ -55,67 +72,34 @@ class gruporolController extends Controller
             \DB::commit();
         }
 
-        $datos = [
-            'idgrupo' => $idGrupo,
-            'idrol' => $idRol,
-            'estado_gruporol' => '1'
-        ];
-
-        \DB::beginTransaction();
-        try {
-            $grupo_rol = grupo_rol::create($datos);
-
-        } catch (QueryException $e) {
-            \DB::rollback();
-        }
-        \DB::commit();
-
-        return $this->crearRespuesta('"' . $grupo->nombre_grupo . '" ha sido creado.', 201);
+        return $this->crearRespuesta(' ha sido creado.', 201);
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function destroy($id) {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $gruporol = grupo_rol::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($gruporol) {
+
+            $datos = [
+                'idgruporol' => $gruporol->idgruporol,
+                'estado_gruporol' => '0'
+            ];
+
+            $gruporol->fill($datos);
+
+            \DB::beginTransaction();
+            try {       
+                $gruporol->save();
+            } catch (QueryException $e) {
+                \DB::rollback();
+            }
+            \DB::commit();
+
+            return $this->crearRespuesta(' a sido eliminado.', 200);
+        }
+        return $this->crearRespuestaError('Grupo no encotrado', 404);
     }
 }
