@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\personal;
+use App\Models\empresa;
+use App\Models\sede;
+use App\Models\cargo;
 
 class personalController extends Controller
 {
@@ -47,6 +50,41 @@ class personalController extends Controller
 
         return $this->crearRespuestaError('Entidad no encontrada', 404);
     }
+
+    public function nrodocumento(Request $request) {
+
+        $paramsTMP = $request->all();
+
+        $row = array('existeEntidad' => false);
+
+        $personal = personal::where('numero_documento', '=', $paramsTMP['numero_documento'])->first();
+
+        if ($personal) {
+            $row['existeEntidad'] = true;
+            $row['nombreEntidad'] = $personal->nombres;
+            $row['numeroDocEntidad'] = $personal->numero_documento;
+            $row['idPersonal'] = $personal->idpersonal;
+        }
+        return $this->crearRespuesta($row, 201);
+    }
+    
+    public function newpersonal(Request $request) {
+
+        $empresa = new empresa();
+
+        $paramsTMP = $request->all();
+
+        $listcombox = array(
+            'documentos' => $empresa->tipo_documento_identidad(),
+            'departamentos' => $empresa->departamentos()
+        );
+
+        $listcombox['sedes'] = sede::select('idsede', 'nombre_sede', 'direccion')->where('estado_sede', '=', 1)->get();
+        $listcombox['cargos'] = cargo::where('estado_cargo', '=', 1)->get();
+
+        return $this->crearRespuesta([], 200, '', '', $listcombox);
+    }
+
 
 }
 

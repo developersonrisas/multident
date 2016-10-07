@@ -19,7 +19,10 @@
 use App\Models\entidad;
 
 Route::get('/personal', 'personalController@index');
+Route::get('/personal/new', 'personalController@newpersonal');
+Route::get('/personal/documento/nro', 'personalController@nrodocumento');
 
+Route::get('/ubigeo', 'ubigeoController@index'); 
 // GRUPO
 Route::get('/grupo/rolesAgregados', 'grupoController@rolesAgregados');
 Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');

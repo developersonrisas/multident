@@ -41,71 +41,58 @@
                                 <div class="col-md-12 pb-sm">                        
                                     <label class="col-sm-2 col-xs-6 control-label">Tipo documento: <span class="asterisk">*</span></label>
                                     <div class="col-sm-4 col-xs-6">   
-                                        <select ng-model="vm.entidad.iddocumento" name="iddocumento" class="form-control input-sm" required  ng-disabled="vm.edicion">                                        
-                                        </select>                                    
-                                        <div ng-messages="miForm.iddocumento.$error" class="required" role="alert" ng-show="miForm.iddocumento.$dirty">
+                                        <select ng-model="vm.personal.idtipodocumento_identidad" name="idtipodocumento" class="form-control input-sm" ng-options="item.idtipodocumento_identidad as item.nombre_tipodocumento for item in vm.others.documentos" required ng-disabled="vm.edicion"></select>
+                                        <div ng-messages="miForm.idtipodocumento.$error" class="required" role="alert" ng-show="miForm.idtipodocumento.$dirty">
                                             <div ng-message="required">El campo es requerido</div>
                                         </div>
                                     </div>
                                     <label class="col-sm-2 col-xs-6 control-label">Número: <span class="asterisk">*</span></label>
                                     <div class="col-sm-4 col-xs-6">  
                                         <!--ng-pattern="/^([0-9])*$/"--> 
-                                        <input type="text" name="numerodoc" ng-model="vm.entidad.numerodoc" class="form-control input-sm mb-5" required maxlength="9" ng-minlength="9" ng-disabled="vm.entidad.iddocumento == null" ng-blur="vm.getDocumento();" ng-change="vm.getDocumentoChange();"  />
+                                        <input type="text" name="numerodoc" ng-model="vm.personal.numero_documento" class="form-control input-sm mb-5" required maxlength="8" ng-minlength="8" ng-pattern="/^([0-9])*$/" ng-disabled="vm.personal.idtipodocumento_identidad == null" ng-blur="vm.getDocumento();" ng-change="vm.getDocumentoChange();"  />
                                         <div ng-messages="miForm.numerodoc.$error" class="required" role="alert" ng-show="miForm.numerodoc.$dirty">
                                             <div ng-message="required">El campo es requerido</div>
-                                            <!--<div ng-message="pattern">N&uacute;mero de documento inv&aacute;lido</div>-->
-                                            <div ng-message="minlength">Debe ser 9 d&iacute;gitos</div>
+                                            <div ng-message="pattern">N&uacute;mero de documento inv&aacute;lido</div>
+                                            <div ng-message="minlength">Debe ser 8 d&iacute;gitos</div>
                                         </div>  
                                         <div class="callout callout-warning mb-20"  ng-show="vm.validacionDocumento.existeEntidad && miForm.numerodoc.$valid">
                                             <p>{{vm.validacionDocumento.nombreEntidad}}. Ya existe.</p>                                            
-                                            <div ng-show="vm.validacionDocumento.existeSubEntidad">                     
-                                                <a data-ui-sref="{{vm.stateparent}}.edit({entidadId:vm.validacionDocumento.idEntidad})" class="btn btn-default btn-sm"><i class="fa fa-user"></i> Ver informaci&oacute;n</a>
-                                            </div> 
-                                            <div ng-show="!vm.validacionDocumento.existeSubEntidad">         
-                                                <a href="#" class="btn btn-default btn-sm" ng-click="vm.registrarSubEntidad()"><i class="fa fa-user"></i> {{vm.descripcion}}</a>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" ng-show="vm.requiredNombre">
+                            <div class="row">
                                 <div class="col-md-12 pb-sm">                                        
                                     <label class="col-sm-2 col-xs-6 control-label">Apellido paterno: <span class="asterisk">*</span></label> 
                                     <div class="col-sm-4 col-xs-6"> 
-                                        <input type="text" name="apellidopat" ng-model="vm.entidad.apellidopat" class="form-control input-sm mb-5" maxlength="50" ng-required="vm.requiredNombre" />                                    
-                                        <div ng-messages="miForm.apellidopat.$error" class="required" role="alert" ng-show="miForm.apellidopat.$dirty && vm.requiredNombre">
+                                        <input type="text" name="apellidopat" ng-model="vm.personal.ape_paterno" class="form-control input-sm mb-5" maxlength="50" required />                                    
+                                        <div ng-messages="miForm.apellidopat.$error" class="required" role="alert" ng-show="miForm.apellidopat.$dirty">
                                             <div ng-message="required">El campo es requerido</div>
                                         </div>
                                     </div>
                                     <label class="col-sm-2 col-xs-6 control-label">Apellido materno:</label> 
                                     <div class="col-sm-4 col-xs-6">
-                                        <input type="text" name="apellidomat" ng-model="vm.entidad.apellidomat" maxlength="50" class="form-control input-sm mb-5" ng-disabled="!vm.requiredNombre" />
+                                        <input type="text" name="apellidomat" ng-model="vm.personal.ape_materno" maxlength="50" class="form-control input-sm mb-5" required />
                                     </div> 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 pb-sm">                                        
-                                    <label class="col-sm-2 col-xs-6 control-label" ng-show="vm.requiredNombre">Nombre(s): <span class="asterisk">*</span></label> 
-                                    <div class="col-sm-4 col-xs-6" ng-show="vm.requiredNombre">
-                                        <input type="text" name="nombre" ng-model="vm.entidad.nombre" class="form-control input-sm mb-5" maxlength="50" ng-required="vm.requiredNombre" />                                    
-                                        <div ng-messages="miForm.nombre.$error" class="required" role="alert" ng-show="miForm.nombre.$dirty && vm.requiredNombre">
-                                            <div ng-message="required">El campo es requerido</div>
-                                        </div>
-                                    </div> 
-                                    <label class="col-sm-2 col-xs-6 control-label" ng-show="!vm.requiredNombre">Razón social: <span class="asterisk">*</span></label> 
-                                    <div class="col-sm-4 col-xs-6" ng-show="!vm.requiredNombre"> 
-                                        <input type="text" name="razonsocial" ng-model="vm.entidad.razonsocial" class="form-control input-sm mb-5" maxlength="100" ng-required="!vm.requiredNombre" />
-                                        <div ng-messages="miForm.razonsocial.$error" class="required" role="alert" ng-show="miForm.razonsocial.$dirty && !vm.requiredNombre">
+                                    <label class="col-sm-2 col-xs-6 control-label">Nombre(s): <span class="asterisk">*</span></label> 
+                                    <div class="col-sm-4 col-xs-6">
+                                        <input type="text" name="nombre" ng-model="vm.personal.nombres" class="form-control input-sm mb-5" maxlength="50" required />                                    
+                                        <div ng-messages="miForm.nombre.$error" class="required" role="alert" ng-show="miForm.nombre.$dirty">
                                             <div ng-message="required">El campo es requerido</div>
                                         </div>
                                     </div> 
                                 </div>
                             </div>
-                            <div class="row" ng-show="vm.requiredNombre">
+                            <div class="row">
                                 <div class="col-md-12 pb-sm">                                                                                                            
                                     <label class="col-sm-2 col-xs-6 control-label">Fecha nacimiento:</label> 
                                     <div class="col-sm-4 col-xs-6">
-                                        <input data-input-mask type="text" name="fechanacimiento" ng-model="vm.entidad.fechanacimiento" maxlength="10" class="form-control input-sm mb-5" data-inputmask="'alias': 'dd/mm/yyyy'" />
+                                        <input  type="text" name="fechanacimiento" ng-model="vm.personal.fecha_nacimiento" maxlength="10" class="form-control input-sm mb-5" data-inputmask="'alias': 'dd/mm/yyyy'" />
                                     </div> 
                                     <label class="col-sm-2 col-xs-6 control-label">Sexo: <span class="asterisk">*</span></label>   
                                     <div class="col-sm-4 col-xs-6">
@@ -162,25 +149,19 @@
                             <h4 class="mt-10">Direcci&oacute;n</h4>
                             <div class="row">
                                 <div class="col-md-12 pb-sm">                                        
-                                    <label class="col-sm-2 col-xs-12 control-label">Pa&iacute;s/Prov./Poblaci&oacute;n:</label>                             
-                                    <div class="col-sm-3 col-xs-4">  
-                                        <select name="pais"  ng-model="vm.entidad.pais" class="form-control input-sm mb-5">
-                                            <option value="">-- Pa&iacute;s --</option>
-                                        </select>
-                                    </div>
+                                    <label class="col-sm-2 col-xs-12 control-label">Departamento/Prov./Distrito :</label>                             
                                     <div class="col-sm-4 col-xs-4">  
-                                        <select name="departamento" ng-model="vm.entidad.dpto" class="form-control input-sm mb-5" >                                            
+                                        <select name="departamento" ng-model="vm.personal.iddepartamento" ng-options="item.iddepartamento as item.descripcion_ubig for item in vm.others.departamentos" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({iddepartamento: vm.personal.iddepartamento}, 'provincias')" class="form-control input-sm mb-5" >                                            
+                                            <option value="">-- Departamento --</option>
+                                        </select>
+                                    </div> 
+                                    <div class="col-sm-3 col-xs-4">  
+                                        <select name="provincia" ng-model="vm.personal.idprovincia" ng-options="item.idprovincia as item.descripcion_ubig for item in vm.others.provincias" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({iddepartamento: vm.personal.iddepartamento, idprovincia: vm.personal.idprovincia}, 'distritos')" class="form-control input-sm mb-5">
                                             <option value="">-- Provincia --</option>
                                         </select>
                                     </div> 
                                     <div class="col-sm-3 col-xs-4">  
-                                        <!--<select name="provincia" ng-model="vm.entidad.prov"  ng-options="item.prov as item.nombre for item in vm.others.provincias" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais, dpto: vm.entidad.dpto || '', prov: vm.entidad.prov || ''}, 'distritos')">-->                                            
-                                        <select name="provincia" ng-model="vm.entidad.prov"  class="form-control input-sm mb-5">
-                                            <option value="">-- Poblaci&oacute;n --</option>
-                                        </select>
-                                    </div> 
-                                    <div class="col-sm-3 col-xs-4" ng-hide="true" >  
-                                        <select name="distrito" ng-model="vm.entidad.dist" class="form-control input-sm mb-5">
+                                        <select name="distrito" ng-model="vm.personal.idubigeo" ng-options="item.idubigeo as item.descripcion_ubig for item in vm.others.distritos" class="form-control input-sm mb-5">
                                             <option value="">-- Distrito --</option>
                                         </select>
                                     </div>                                     

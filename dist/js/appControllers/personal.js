@@ -77,8 +77,6 @@
 
         vm.filter = {};
         vm.stateparent = $state.$current.parent.self.name;
-        console.log("aqui");
-        console.log(vm.stateparent );
         //vm.filter.tipoentidad = $state.$current.parent.self.name;
         $scope.$on('handleBroadcast', function () {
             vm.getPage();
@@ -186,59 +184,33 @@
 
     }
 
-    newPersonalCtrl.$inject = ['$scope', '$state', 'personalService'];
-    function newPersonalCtrl($scope, $state, personalService) {
+    newPersonalCtrl.$inject = ['$scope', '$state', 'personalService','ubigeoService'];
+    function newPersonalCtrl($scope, $state, personalService,ubigeoService) {
         var vm = this;
 
         vm.stateparent = $state.$current.parent.self.name;
-        /*vm.entidadespecialidad = [];
-        vm.entidadsede = [];
-        vm.entidadturno = [];*/
-        vm.entidad = {};
+        vm.personal = {};
+        //vm.requiredNombre = true;
+        vm.personal.idtipodocumento_identidad = 1;
         vm.edicion = false;
 
-        /*vm.descripcion = '';
-        switch (vm.stateparent) {
-            case 'personal':
-                vm.descripcion = 'Registrarlo como personal';
-                vm.entidad.iddocumento = 1;
+        /*vm.iddocumentoChange = function () {
+            if (vm.personal.idtipodocumento_identidad === 1 || vm.personal.idtipodocumento_identidad === 2) {
                 vm.requiredNombre = true;
-                break;
-            case 'cliente':
-                vm.descripcion = 'Registrarlo como paciente';
-                vm.entidad.iddocumento = 1;
-                vm.requiredNombre = true;
-                break;
-            case 'medico':
-                vm.descripcion = 'Registrarlo como médico';
-                vm.entidad.iddocumento = 1;
-                vm.requiredNombre = true;
-                break;
-            case 'proveedor':
-                vm.descripcion = 'Registrarlo como proveedor';
-                vm.entidad.iddocumento = 2;
-                vm.requiredNombre = false;
-                break;
-            default:
-        }*/
-
-        vm.iddocumentoChange = function () {
-            if (vm.entidad.iddocumento === 1 || vm.entidad.iddocumento === 3) {
-                vm.requiredNombre = true;
-                vm.entidad.razonsocial = '';
+                vm.personal.razonsocial = '';
             }
-            if (vm.entidad.iddocumento === 2) {
+            if (vm.personal.idtipodocumento_identidad === 3) {
                 vm.requiredNombre = false;
-                vm.entidad.apellidopat = '';
-                vm.entidad.apellidomat = '';
-                vm.entidad.nombre = '';
+                vm.personal.apellidopat = '';
+                vm.personal.apellidomat = '';
+                vm.personal.nombre = '';
             }
-        };
+        };*/
 
-        /*vm.validacionDocumento = {};*/
+        vm.validacionDocumento = {};
         vm.getDocumento = function () {
             if ($scope.miForm.numerodoc.$valid) {
-                entidadService.GetNumero({numerodoc: vm.entidad.numerodoc, tipoentidad: vm.stateparent}).then(function (entidades) {
+                personalService.GetNumero({numero_documento: vm.personal.numero_documento}).then(function (entidades) {
                     vm.validacionDocumento = entidades.data;
                 });
             }
@@ -265,36 +237,35 @@
         };
 
         vm.changeUbigeo = function (ubigeo, to) {
-            if (ubigeo.pais === '' || ubigeo.dpto === '' || ubigeo.prov === '') {
+            if (ubigeo.iddepartamento === '' || ubigeo.idprovincia === '') {
                 vm.others[to] = [];
                 return false;
             }
             if (to === 'departamentos') {
-                vm.entidad.dpto = ''; //Por default '- Provincia -'
+                vm.personal.iddepartamento = ''; //Por default '- Provincia -'
                 vm.others.provincias = []; //Limpiar distritos
             }
             if (to === 'provincias') {
-                vm.entidad.prov = ''; //Por default '- Provincia -'
+                vm.personal.idprovincia = ''; //Por default '- Provincia -'
                 vm.others.distritos = []; //Limpiar distritos
             }
             if (to === 'distritos') {
-                vm.entidad.dist = ''; //Por default '- Distrito -' 
+                vm.personal.iddistrito = ''; //Por default '- Distrito -' 
             }
             ubigeoService.GetIndex(ubigeo).then(function (result) {
                 vm.others[to] = result.data;
             });
         };
 
-        /*GridInternoTurno.getGrid(vm, $scope);
+        /*GridInternoTurno.getGrid(vm, $scope);*/
 
-        entidadService.GetNew({tipoentidad: vm.stateparent}).then(function (entidades) {
-            vm.others = entidades.others;
-            //Inicializar con España
-            vm.entidad.pais = 'ES';
-            vm.changeUbigeo({pais: vm.entidad.pais || ''}, 'departamentos');
+        personalService.GetNew({tipoentidad: vm.stateparent}).then(function (personales) {
+            vm.others = personales.others;
+            vm.personal.iddepartamento = '14';
+            vm.changeUbigeo({iddepartamento: vm.personal.iddepartamento}, 'provincias');
         });
 
-        vm.agregarHorarioItem = function () { 
+        /*vm.agregarHorarioItem = function () { 
             if( !angular.isObject(vm.entidadturno.iddia) ){ 
               Notification.error({message: 'Falta Información del Dia' , title: '<i class="fa fa-warning"></i> Error' , delay : 2500}); 
               return false; 

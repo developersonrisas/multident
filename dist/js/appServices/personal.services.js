@@ -56,7 +56,7 @@
         
         //ConsultarSiExisteNroDocumento
         function GetNumero(request){
-            return $http.get($rootScope.servidor + '/personal/documento/nro', {params: request}).then(handleSuccess, handleError('Error getting all producto'));
+            return $http.get($rootScope.api + '/personal/documento/nro', {params: request}).then(handleSuccess, handleError('Error getting all producto'));
         }
         
         //Actulizar personal Con una nueva personal
@@ -71,7 +71,7 @@
         
         //Nuevo 
         function GetNew(request){
-            return $http.get($rootScope.servidor + '/entidad/new', {params: request}).then(handleSuccess, handleError('Error getting all producto'));
+            return $http.get($rootScope.api + '/personal/new', {params: request}).then(handleSuccess, handleError('Error getting all producto'));
         }
         
         //Grabar
