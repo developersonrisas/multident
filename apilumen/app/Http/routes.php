@@ -16,19 +16,16 @@
 });
 */
 
-use App\Models\entidad;
-
 Route::get('/personal', 'personalController@index');
+Route::get('/personal/new', 'personalController@newpersonal');
+Route::get('/personal/documento/nro', 'personalController@nrodocumento');
 
+Route::get('/ubigeo', 'ubigeoController@index'); 
 // GRUPO
 Route::get('/grupo/rolesAgregados', 'grupoController@rolesAgregados');
 Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');
-
 Route::get('/grupo', 'grupoController@index');
 Route::get('/grupo/{id}', 'grupoController@show');
-//Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');
-
-
 Route::post('/grupo', 'grupoController@store');
 Route::post('/grupo/{id}', 'grupoController@update');
 Route::post('/grupo/delete/{id}', 'grupoController@destroy');
@@ -52,9 +49,6 @@ Route::get('/grupoRol/{id}', 'gruporolController@show');
 Route::post('/grupoRol/{id}', 'gruporolController@update');
 Route::post('/grupoRol/delete/{id}', 'gruporolController@destroy');
 // FIN DE GRUPO_ROLES	
-
-
-
 
 // USUARIOS	
 Route::get('/usuario', 'usuarioController@index');
@@ -102,20 +96,3 @@ Route::post('/tipoCambio', 'tipoCambioController@store');
 Route::post('/tipoCambio/{id}', 'tipoCambioController@update');
 Route::post('/tipoCambio/delete/{id}', 'tipoCambioController@destroy');
 // FIN DE TIPO DE CAMBIO		
-
-
-// SEDES	
-Route::get('/sede', 'sedeController@index');
-Route::get('/sede/{id}', 'sedeController@show');
-Route::post('/sede', 'sedeController@store');
-Route::post('/sede/{id}', 'sedeController@update');
-Route::post('/sede/delete/{id}', 'sedeController@destroy');
-// FIN DE SEDES	
-
-// EMPRESAS ADMIN	
-Route::get('/empresaadmin', 'empresaadminController@index');
-Route::get('/empresaadmin/{id}', 'empresaadminController@show');
-Route::post('/empresaadmin', 'empresaadminController@store');
-Route::post('/empresaadmin/{id}', 'empresaadminController@update');
-Route::post('/empresaadmin/delete/{id}', 'empresaadminController@destroy');
-// FIN DE EMPRESAS ADMIN	

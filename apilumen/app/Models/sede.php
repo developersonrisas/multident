@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class sede extends Model
 {
-    //
+
     public $timestamps = false;
     protected $table = 'sede';
     protected $primaryKey = 'idsede';
     protected $fillable = [
+        'idsede',
         'nombre_sede',
         'idubigeo',
         'direccion',

@@ -15,6 +15,7 @@ angular.module('adminLTE', [
     'adminLTEDirective',
     'adminLTEController',
     'ui.bootstrap',
+    'ngMessages',
 ]);
 
 
