@@ -41,3 +41,7 @@
 .btn-primary:hover, .btn-primary:active {
     background-color: #028bbf;
 }
+
+.modal-xl {
+    width: 1150px;
+}

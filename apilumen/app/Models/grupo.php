@@ -96,8 +96,8 @@ class grupo extends Model
                 WHERE rol.idrol NOT IN( 
                     SELECT rol.idrol FROM grupo_rol 
                     LEFT JOIN rol ON rol.idrol = grupo_rol.idrol AND grupo_rol.estado_gruporol = 1 
-                    LEFT JOIN grupo ON grupo_rol.idgrupo=grupo.idgrupo AND grupo.estado_grupo = '.$datos['idgrupo'].'
-                    WHERE rol.estado_rol=1 AND grupo_rol.idgrupo = 1
+                    LEFT JOIN grupo ON grupo_rol.idgrupo=grupo.idgrupo AND grupo.estado_grupo = 1
+                    WHERE rol.estado_rol=1 AND grupo_rol.idgrupo = '.$datos['idgrupo'].'
                 )
                 AND estado_rol = 1 AND idmodulo='.$datos['idmodulo'].'';
         //$sql .= $datos['sortName'] ? ' ORDER BY' . $datos['sortName']. ' '. $datos['sort'] : ''; 
@@ -109,7 +109,7 @@ class grupo extends Model
 
 
     public function roles_agregados($datos){
-        $sql = 'SELECT rol.idrol,rol.idparent, rol.orden_rol, rol.nombre_rol, rol.url_rol, rol.icono ,grupo_rol.idgruporol
+        $sql = 'SELECT grupo_rol.idgruporol,rol.idrol,rol.idparent, rol.orden_rol, rol.nombre_rol, rol.url_rol, rol.icono ,grupo_rol.idgruporol
             FROM grupo_rol 
             LEFT JOIN rol ON rol.idrol = grupo_rol.idrol AND grupo_rol.estado_gruporol = 1 
             LEFT JOIN grupo ON grupo_rol.idgrupo=grupo.idgrupo AND grupo.estado_grupo = 1 

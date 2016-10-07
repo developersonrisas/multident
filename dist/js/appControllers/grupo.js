@@ -390,7 +390,7 @@
                 {name: 'Item', field: 'idrol', width: '60'},
                 {name: 'Icono', field: 'icono', width: '60', cellTemplate:'<div class="text-center"><i style="font-size:18px;margin-top: 7px;" class="{{ COL_FIELD }} " ></i></div>'},
                 {name: 'Nombre', field: 'nombre_rol', width: '150'},
-                {name: 'Accion', field: 'descripcion', maxwidth: '100', cellClass: 'text-center', cellTemplate: '<a class="btn btn-primary btn-xs" ng-click="grid.appScope.btnAgregarRolesAGrupo();">Seleccionar</a>'}
+                {name: 'Accion', field: 'idrol', maxwidth: '100', cellClass: 'text-center', cellTemplate: '<a class="btn btn-primary btn-xs" ng-click="grid.appScope.btnAgregarRolesAGrupo(COL_FIELD);">Seleccionar</a>'}
             ];
 
             GridNoAgregados.getGrid(vm, columnsDefs, $scope, function () {
@@ -415,18 +415,16 @@
                 idgrupo: modalParam.data.idgrupo,
                 idmodulo : idmodulo
             };
-
-            var accion = '<a class="btn btn-danger btn-xs" ng-click="grid.appScope.deleteRow(row);"><i class="fa fa-trash"></i></a>';
             var columnsDefs = [
                 {name: 'Item', field: 'idrol', width: '60'},
                 {name: 'Icono', field: 'icono', width: '60', cellTemplate:'<div class="text-center"><i style="font-size:18px;margin-top: 7px;" class="{{ COL_FIELD }} " ></i></div>'},
                 {name: 'Nombre', field: 'nombre_rol', width: '150'},
-                {name: 'Accion', field: 'descripcion', maxwidth: '100', cellClass: 'text-center', cellTemplate: accion},
+                {name: 'Accion', field: 'idgruporol', maxwidth: '100', cellClass: 'text-center', cellTemplate: '<a class="btn btn-danger btn-xs" ng-click="grid.appScope.btnEliminarRolGrupo(COL_FIELD);"><i class="fa fa-trash"></i></a>' },
             ];
 
             GridAgregados.getGrid(vm, columnsDefs, $scope, function () {
                 grupoService.RolesAgregados($scope.datosGrid).then(function (grupos) {
-                    console.log(grupos.data);
+                    //console.log(grupos.data);
                     vm.gridRolesAdd.totalItems = grupos.total;
                     vm.gridRolesAdd.data = grupos.data;
                     $timeout(function () {
@@ -442,10 +440,38 @@
 
         // -------------------------------
         // para agregar un rol al grupo
-        vm.btnAgregarRolesAGrupo = function(){
-            alert("llego");
+        vm.btnAgregarRolesAGrupo = function(rolID){            
+            vm.OBJrolgrupo = {
+                idgrupo: modalParam.data.idgrupo,
+                idrol : rolID
+            };
+
+            grupoRolService.Create(vm.OBJrolgrupo).then(function (gruposroles) {
+                if (gruposroles.type === 'success') {
+                    vm.loadRolesNoAgregados(vm.rol.idmodulo);
+                    vm.loadRolesAgregados(vm.rol.idmoduloAdd);
+
+                } else {
+                    Notification.error({message: roles.data, title: '<i class="fa fa-ban"></i>'});
+                    $scope.miForm.$submitted = false;
+                }
+            });
         };
         
+        vm.btnEliminarRolGrupo = function(gruporolID){
+
+            grupoRolService.Delete(gruporolID).then(function (gruposroles) {
+                if (gruposroles.type === 'success') {
+                    vm.loadRolesNoAgregados(vm.rol.idmodulo);
+                    vm.loadRolesAgregados(vm.rol.idmoduloAdd);
+
+                } else {
+                    Notification.error({message: roles.data, title: '<i class="fa fa-ban"></i>'});
+                    $scope.miForm.$submitted = false;
+                }
+            });
+
+        };
 
 
 

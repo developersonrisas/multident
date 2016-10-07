@@ -4,8 +4,8 @@
             .controller('listRolCtrl', listRolCtrl)
             .controller('newRolCtrl', newRolCtrl)
             .controller('editRolCtrl', editRolCtrl)
-            .controller('modalRolCtrl', modalRolInstanceCtrl)
-            .controller('modalRolEyeInstanceCtrl', modalRolEyeInstanceCtrl);
+            .controller('modalRolInstanceCtrl', modalRolInstanceCtrl)
+            .controller('modalSubRolInstanceCtrl', modalSubRolInstanceCtrl);
 
 
     listRolCtrl.$inject = ['$scope', '$state', 'rolService', 'GridExternal', 'uiGridConstants' ,'$uibModal', '$timeout', '$log' ];
@@ -53,19 +53,19 @@
         vm.openModal = function (accion, data) {
 
             var templateUrl = 'myModalContent.html';
-            var controller = 'modalEntidadInstanceCtrl';
+            var controller = 'modalRolInstanceCtrl';
             var size = 'sm';
 
-            if (accion === 'eye') {
-                controller = 'modalEntidadEyeInstanceCtrl as vm';
-                templateUrl = 'myModalEyeContent.html';
-                size = 'lg';
+            if (accion === 'subrol') {
+                controller = 'modalSubRolInstanceCtrl as vm';
+                templateUrl = 'views/modulos/modal-sub-rol.html';
+                size = 'md';
             }
 
             var modalInstance = $uibModal.open({
                 templateUrl: templateUrl,
                 controller: controller,
-                windowClass: 'modal-primary',
+                windowClass: 'modal-default',
                 size: size,
                 resolve: {
                     modalParam: function () {
@@ -80,7 +80,7 @@
 
             modalInstance.result.then(function (reload) {
                 if (reload)
-                    loadEntidades();
+                    loadRoles();
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
@@ -138,6 +138,7 @@
 
         rolService.GetShow($stateParams.rolId).then(function (roles) {
             vm.rol = roles.data;
+            //console.log(roles.data);
             vm.others = roles.others;
 
             before = angular.copy(vm.rol);
@@ -207,39 +208,39 @@
     }
 
 
-    modalRolEyeInstanceCtrl.$inject = ['$scope', '$uibModalInstance', 'modalParam', 'rolService', '$state'];
-    function modalRolEyeInstanceCtrl($scope, $uibModalInstance, modalParam, rolService, $state) {
-
+    modalSubRolInstanceCtrl.$inject = ['$scope', '$uibModalInstance', 'modalParam', 'rolService', '$state', 'Notification'];
+    function modalSubRolInstanceCtrl($scope, $uibModalInstance, modalParam, rolService, $state, Notification) {
         var vm = this;
         vm.stateparent = $state.$current.parent.self.name;
 
-        vm.titulo = '';
-        switch (vm.stateparent) {
-            case 'Rol':
-                vm.titulo = 'Rol';
-                break;
-            case 'cliente':
-                vm.titulo = 'Paciente';
-                break;
-            case 'medico':
-                vm.titulo = 'Médico';
-                break;
-            case 'proveedor':
-                vm.titulo = 'Proveedor';
-                break;
-            default:
-        }
+        $scope.rol = {};
+        $scope.rol = {
+            idrol: modalParam.data.idrol,
+            nombre_rol: modalParam.data.nombre_rol
+        };
+        vm.rol = {idparent:modalParam.data.idrol};
+        
+        vm.save = function() {
 
-        rolService.GetProfile(modalParam.data).then(function (entidades) {
-            vm.entidad = entidades.data;
-            vm.others = entidades.others;
-            vm.cliente = entidades.others.clientes;
-            vm.Rol = entidades.others.Roles;
-            //vm.proveedor = entidades.others.proveedores;
-            vm.medico = entidades.others.medicos;
-            vm.entidadespecialidad = entidades.others.entidadespecialidad;
-            vm.entidadsede = entidades.others.entidadsede;
-        });
+            vm.OBJsub = {
+                sub: vm.rol,
+
+            };
+            //console.log(vm.OBJsub);
+
+            rolService.CreateSub(vm.OBJsub).then(function (grupos) {
+                var reload = false;
+                if (grupos.type === 'success') {
+                    reload = true;
+                    Notification.primary({message: grupos.data, title: '<i class="fa fa-check"></i>'});
+                } else {
+                    Notification.error({message: grupos.data, title: '<i class="fa fa-ban"></i>'});
+                    $scope.miForm.$submitted = false;
+                }
+                $uibModalInstance.close(reload);
+            });
+
+        };
 
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');

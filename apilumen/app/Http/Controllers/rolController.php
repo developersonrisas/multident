@@ -39,13 +39,19 @@ class rolController extends Controller
         $paramsTMP = $request->all();        
 
 
-        $orderName = !empty($paramsTMP['orderName']) ? $paramsTMP['orderName'] : 'rol.idrol';
+        $orderName = !empty($paramsTMP['orderName']) ? $paramsTMP['orderName'] : 'rol.idparent';
         $orderSort = !empty($paramsTMP['orderSort']) ? $paramsTMP['orderSort'] : 'ASC';
+
+        $order = [
+            'rol.idparent' => 'ASC',
+            'rol.idrol' => 'ASC'
+        ];
+
         $like = !empty($paramsTMP['likerol']) ? trim($paramsTMP['likerol']) : '';
         $pageSize = !empty($paramsTMP['pageSize']) ? $paramsTMP['pageSize'] : 25;
 
 
-        $data = $rol->grid($param, $like, $pageSize, $orderName, $orderSort);
+        $data = $rol->grid($param, $like, $pageSize, $order);
 
         if ($data) {
             //return $this->crearRespuesta($data->items(), 200, $data->total(), $data->count() . '|' . $orderName . '|' . $orderSort, $paramsTMP);
@@ -53,7 +59,7 @@ class rolController extends Controller
             foreach ($data as $items) {
                 $rol = NULL;
                 $icono = NULL;
-                if($items->idparent == NULL){
+                if($items->idparent == $items->idrol){
                     $rol = $items->nombre_rol;
                     $icono = $items->icono;
                 }
@@ -97,6 +103,48 @@ class rolController extends Controller
             'icono' => $request['rol']['icono'],
             'fecha_modif' => date("Y-m-d H:i:s"),
             'idmodulo' => $request['rol']['idmodulo'],
+            'idusuario' => '1',
+            'estado_rol' => '1'
+        ];
+
+        \DB::beginTransaction();
+        try {
+            $rol = rol::create($datos);
+
+        } catch (QueryException $e) {
+            \DB::rollback();
+        }
+        \DB::commit();
+
+        return $this->crearRespuesta('"' . $rol->nombre_rol . '" ha sido creado.', 201);
+    }
+
+    public function storeSub(Request $request) {
+
+        $request = $request->all();
+        $datos = [];
+
+       // $parent = rol::find($request['sub']['idparent']);
+        $idparent = $request['sub']['idparent'];
+        $parent = rol::where('idrol', '=', $idparent)->first();
+
+        //VALIDACIONES EN LA BD
+
+        if (!empty($request['sub']['nombre_rol'])) {
+            $nombreRol = $request['sub']['nombre_rol'];
+            $tmp = rol::where('nombre_rol', '=', $nombreRol)->first();
+            if ($tmp) {
+                return $this->crearRespuesta('No puede registrarse, el nombre del "' . $nombreRol . '" ya existe. Pertenece a ' . $tmp->nombre_rol, [200, 'info']);
+            }
+        }
+
+        $datos = [
+            'nombre_rol' => $request['sub']['nombre_rol'],
+            'url_rol' => $request['sub']['url_rol'],
+            'icono' => $request['sub']['icono'],
+            'fecha_modif' => date("Y-m-d H:i:s"),
+            'idparent' => $request['sub']['idparent'],
+            'idmodulo' => $parent->idmodulo,
             'idusuario' => '1',
             'estado_rol' => '1'
         ];
