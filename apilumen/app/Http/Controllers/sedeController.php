@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\sede;
-use \Firebase\JWT\JWT;
+
 
 class sedeController extends Controller
 {
-    //
+
     private function formatFecha($fecha, $format = 'dd/mm/yyyy') {
         $newFecha = NULL;
         if (!empty($fecha) && strlen($fecha) == 10) {
@@ -168,10 +170,5 @@ class sedeController extends Controller
 
 
 }
-
-
-
-
-
 
 
