@@ -54,7 +54,8 @@
             <div class="mb-10" style="margin-bottom:5px">                 
                 <a class="btn btn-sm btn-info"  ng-click='btnToggleFiltering()'>Buscar</a>
 
-                <div class="pull-right">                
+                <div class="pull-right">   
+                    <a ui-sref="#" class="btn btn-sm btn-success" tooltip-placement="top" uib-tooltip="Ver" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-eye"></i> </a>             
                     <a class="btn btn-sm btn-danger" tooltip-placement="top" uib-tooltip="Eliminar" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal('delete', vm.filaSelecciona[0])"><i class="fa fa-trash-o"></i> </a>
                     <a ui-sref="{{vm.stateparent}}.edit({moduloId:vm.filaSelecciona[0].idmodulo})" class="btn btn-sm btn-warning" tooltip-placement="top" uib-tooltip="Editar" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-pencil"></i> </a> 
                     <a ui-sref="{{vm.stateparent}}.new" class="btn btn-sm btn-primary">Nuevo</a>

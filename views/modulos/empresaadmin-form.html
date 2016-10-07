@@ -1,0 +1,159 @@
+<div class="content">
+<!-- -->
+<div class="row">             
+    <div class="col-md-12"> 
+        <form name="miForm" ng-submit="vm.save();" novalidate>
+            <div class="panel rounded shadow no-margin">            
+                <div class="panel-heading">
+                    <div class="pull-left">         
+                        <a  ui-sref="{{vm.stateparent}}.list" class="btn btn-danger btn-sm"><i class="fa fa-reply"></i> Volver</a>
+                    </div>
+                    <div class="pull-right">                        
+                        <button class="btn btn-primary btn-sm" ng-disabled="miForm.$invalid || miForm.$submitted"><i class="fa fa-floppy-o"></i> Grabar</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>     
+            </div><!-- /.panel -->
+
+            <!-- Start default tabs -->
+            <div class="panel panel-tab  panel-tab-double rounded shadow">
+                <!-- Start tabs heading -->
+                <div class="panel-heading no-padding">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a  data-toggle="tab" style="display: inline-flex;">                                
+                                <i class="fa fa-info-circle"></i>
+                                <div>
+                                    <span style="font-size: 16px;"><strong> Datos</strong></span>
+                                    <span>Información general</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Start tabs content -->
+                <div class="panel-body">
+                    <div class="tab-content"> 
+                        <div class="tab-pane fade in active" id="tab1-1"> 
+                            <h4>Datos generales</h4>
+ 
+                            <div class="row row-m">
+                                <div class="col-md-12">                                        
+                                    <label class="col-sm-2 col-xs-6 control-label">Razón Social: <span class="asterisk text-red">*</span></label> 
+                                    <div class="col-sm-4 col-xs-6"> 
+                                        <input type="text" name="nombre_sede" ng-model="vm.sede.nombre_sede" class="form-control input-sm mb-5" required/>
+                                        <div ng-messages="miForm.nombre_sede.$error" class="required" role="alert" ng-show="miForm.nombre_sede.$dirty">
+                                            <div ng-message="required">El campo es requerido</div>
+                                        </div>
+                                    </div> 
+
+                                    <label class="col-sm-2 col-xs-6 control-label">RUC: <span class="asterisk text-red">*</span></label> 
+                                    <div class="col-sm-4 col-xs-6"> 
+                                        <input type="text" name="ruc" ng-model="vm.sede.ruc" class="form-control input-sm mb-5" ng-minlength="11" maxlength="11"required/>
+                                        <div ng-messages="miForm.ruc.$error" class="required" role="alert" ng-show="miForm.ruc.$dirty">
+                                            <div ng-message="required">El campo es requerido</div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+
+                            <div class="row row-m">
+                                <div class="col-md-12">  
+                                    <label class="col-sm-2 col-xs-6 control-label">Teléfono: <span class="asterisk text-red">*</span> </label> 
+                                    <div class="col-sm-4 col-xs-6">
+                                        <input type="text" name="telefono" ng-model="vm.sede.telefono" class="form-control input-sm mb-5" ng-minlength="7" maxlength="7" required />
+                                        <div ng-messages="miForm.telefono.$error" class="required" role="alert" ng-show="miForm.telefono.$dirty">
+                                            <div ng-message="minlength">Debe ser 7 d&iacute;gitos</div>
+                                        </div>
+                                    </div> 
+                                    <label class="col-sm-2 col-xs- control-label">Celular: <span class="asterisk text-red">*</span></label> 
+                                    <div class="col-sm-4 col-xs-6">
+                                        <input type="text" name="celular" ng-model="vm.sede.celular" class="form-control input-sm mb-5" ng-minlength="9" maxlength="9"/>
+                                        <div ng-messages="miForm.celular.$error" class="required" role="alert" ng-show="miForm.celular.$dirty">                                            
+                                            <div ng-message="minlength">Debe ser 9 d&iacute;gitos</div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="row row-m">
+                                <div class="col-md-12">                                        
+                                    <label class="col-sm-2 col-xs-6 control-label">Email:</label>                
+                                    <div class="col-sm-4 col-xs-6"> 
+                                        <input type="email" name="email" ng-model="vm.sede.email" class="form-control input-sm mb-5" />
+                                    </div>
+
+                                    <label class="col-sm-2 col-xs-6 control-label">Telefono Adicional:</label>                
+                                    <div class="col-sm-4 col-xs-6"> 
+                                        <input type="text" name="telefono_adic" ng-model="vm.sede.telefono_adic" class="form-control input-sm mb-5" />
+                                    </div> 
+                                </div>
+                            </div> 
+                            <div class="row row-m">
+                                <div class="col-md-12">                                        
+                                    <label class="col-sm-2 col-xs-12 control-label">Representante Legal: <span class="asterisk text-red">*</span></label>                       
+                                    <div class="col-sm-8 col-xs-12">                                         
+                                        <input type="text" name="representante_legal" ng-model="vm.sede.representante_legal" maxlength="100" class="form-control input-sm mb-5" required/>     
+                                        <div ng-messages="miForm.representante_legal.$error" class="required" role="alert" ng-show="miForm.representante_legal.$dirty">
+                                            <div ng-message="minlength">El campo es requerido</div>
+                                        </div>                               
+                                    </div> 
+                                </div>
+                            </div> 
+
+                            <h4 class="mt-10">Direcci&oacute;n</h4>
+                            <div class="row row-m">
+                                <div class="col-md-12">                                        
+                                    <label class="col-sm-2 col-xs-12 control-label">Pa&iacute;s/Prov./Poblaci&oacute;n:</label>                             
+                                    <div class="col-sm-3 col-xs-4">  
+                                        <select name="pais"  ng-model="vm.entidad.pais" ng-options="item.pais as item.nombre for item in vm.others.paises" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais || ''}, 'departamentos')">
+                                            <option value="">-- Pa&iacute;s --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-4">  
+                                        <select name="departamento" ng-model="vm.entidad.dpto" ng-options="item.dpto as item.nombre for item in vm.others.departamentos" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais, dpto: vm.entidad.dpto || ''}, 'provincias')" >                                            
+                                            <option value="">-- Provincia --</option>
+                                        </select>
+                                    </div> 
+                                    <div class="col-sm-3 col-xs-4">  
+                                        <!--<select name="provincia" ng-model="vm.entidad.prov"  ng-options="item.prov as item.nombre for item in vm.others.provincias" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({pais: vm.entidad.pais, dpto: vm.entidad.dpto || '', prov: vm.entidad.prov || ''}, 'distritos')">-->                                            
+                                        <select name="provincia" ng-model="vm.entidad.prov"  ng-options="item.prov as item.nombre for item in vm.others.provincias" class="form-control input-sm mb-5">
+                                            <option value="">-- Poblaci&oacute;n --</option>
+                                        </select>
+                                    </div> 
+                                    <div class="col-sm-3 col-xs-4" ng-hide="true" >  
+                                        <select name="distrito" ng-model="vm.entidad.dist" ng-options="item.dist as item.nombre for item in vm.others.distritos" class="form-control input-sm mb-5">
+                                            <option value="">-- Distrito --</option>
+                                        </select>
+                                    </div>                                     
+                                </div>
+                            </div>
+                            <div class="row row-m">
+                                <div class="col-md-12">                                        
+                                    <label class="col-sm-2 col-xs-12 control-label">Direcci&oacute;n: <span class="asterisk text-red">*</span></label>                       
+                                    <div class="col-sm-8 col-xs-12">                                         
+                                        <input type="text" name="direccion" ng-model="vm.sede.direccion" maxlength="100" class="form-control input-sm mb-5" required/>     
+                                        <div ng-messages="miForm.direccion.$error" class="required" role="alert" ng-show="miForm.direccion.$dirty">
+                                            <div ng-message="minlength">El campo es requerido</div>
+                                        </div>                               
+                                    </div> 
+                                </div>
+                            </div>                                                        
+                        </div>
+
+                    </div>
+                </div><!-- /.panel-body -->
+                <!--/ End tabs content -->
+            </div><!-- /.panel -->
+            <!--/ End default tabs -->            
+        </form>
+    </div>
+</div> 
+
+
+<!-- -->
+
+</div>
+<div ui-view></div>
