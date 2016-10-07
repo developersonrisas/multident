@@ -13,6 +13,7 @@
         service.GetShow = GetShow; 
         service.GetNew = GetNew;
         service.Create = Create;
+        service.CreateSub = CreateSub;
         service.Update = Update;
         service.Delete = Delete;        
         return service; 
@@ -37,6 +38,11 @@
         //Grabar
         function Create(OBJrol) {  
             return $http.post($rootScope.api + '/rol', OBJrol).then(handleSuccess, handleError('Error creating entidad'));
+        }
+
+        //Grabar Subrol
+        function CreateSub(OBJsub) {  
+            return $http.post($rootScope.api + '/rol/subrol', OBJsub).then(handleSuccess, handleError('Error creating entidad'));
         }
         
         //Actualizar

@@ -42,6 +42,7 @@ Route::get('/rol', 'rolController@index');
 Route::get('/rol/new', 'rolController@newrol');
 Route::post('/rol', 'rolController@store');
 Route::get('/rol/{id}', 'rolController@show');
+Route::post('/rol/subrol', 'rolController@storeSub');
 Route::post('/rol/{id}', 'rolController@update');
 Route::post('/rol/delete/{id}', 'rolController@destroy');
 // FIN DE ROLES	

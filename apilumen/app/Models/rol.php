@@ -42,7 +42,7 @@ class rol extends Model
         return $newFecha;
     }
 
-    public function grid($param, $likename, $items = 25, $orderName, $orderSort) {
+    public function grid($param, $likename, $items = 25, $order) {
         $select = \DB::table('rol')
                 ->leftJoin('modulo', 'rol.idmodulo', '=', 'modulo.idmodulo')
                 ->select('rol.*','modulo.nombre_modulo as modulo')
@@ -50,7 +50,10 @@ class rol extends Model
                 
 
         $data = $select
-                ->orderBy($orderName, $orderSort)
+                ->orderBy('rol.idparent', 'ASC')
+                ->orderBy('rol.idrol', 'ASC')
+
+
                 ->paginate($items);
 
         foreach ($data as $row) {

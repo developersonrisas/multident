@@ -32,7 +32,6 @@
     </form>
 </script> 
 
-
         <section class="content-header">
           <h1>
             <i class="{{$state.current.data.pageHeader.icono}}"></i> {{$state.current.data.pageHeader.title}}
@@ -52,8 +51,9 @@
                 <button class="btn btn-info btn-sm" type="button" ng-click='btnToggleFiltering()'>Buscar</button>
 
                 <div class="pull-right">                
-                    <a href="#" class="btn btn-sm btn-danger" tooltip-placement="top" uib-tooltip="Eliminar" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal('delete', vm.filaSelecciona[0])"><i class="fa fa-trash-o"></i> </a>
-                    <a ui-sref="{{vm.stateparent}}.edit({rolId:vm.filaSelecciona[0].idrol})" class="btn btn-sm btn-warning" tooltip-placement="top" uib-tooltip="Editar" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-pencil"></i> </a>                    
+                    <a class="btn btn-sm btn-danger" tooltip-placement="top" uib-tooltip="Eliminar" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal('delete', vm.filaSelecciona[0])"><i class="fa fa-trash-o"></i> </a>
+                    <a ui-sref="{{vm.stateparent}}.edit({rolId:vm.filaSelecciona[0].idrol})" class="btn btn-sm btn-warning" tooltip-placement="top" uib-tooltip="Editar" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-pencil"></i> </a>        
+                    <a class="btn btn-sm btn-success" tooltip-placement="top" uib-tooltip="SubRol" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal('subrol',vm.filaSelecciona[0]);">SubRol</a>
                     <a ui-sref="{{vm.stateparent}}.new" class="btn btn-sm btn-primary">Nuevo</a>
                 </div>
                 <div class="clearfix"></div>
