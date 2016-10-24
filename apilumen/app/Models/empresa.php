@@ -85,13 +85,10 @@ class empresa extends Model
         $select = \DB::table('ubigeo')
                 ->select('*')
                 ->where('idubigeo', '=', $idubigeo);
-
         $data = $select
                 ->get();
-
         return $data;
     }
-
 
     public function tipo_documento_identidad() {
         $data = \DB::table('tipo_documento_identidad')
