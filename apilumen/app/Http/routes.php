@@ -16,8 +16,6 @@
 });
 */
 
-use App\Models\entidad;
-
 Route::get('/personal', 'personalController@index');
 Route::get('/personal/new', 'personalController@newpersonal');
 Route::get('/personal/documento/nro', 'personalController@nrodocumento');
@@ -26,12 +24,8 @@ Route::get('/ubigeo', 'ubigeoController@index');
 // GRUPO
 Route::get('/grupo/rolesAgregados', 'grupoController@rolesAgregados');
 Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');
-
 Route::get('/grupo', 'grupoController@index');
 Route::get('/grupo/{id}', 'grupoController@show');
-//Route::get('/grupo/rolesNoAgregados', 'grupoController@rolesNoAgregados');
-
-
 Route::post('/grupo', 'grupoController@store');
 Route::post('/grupo/{id}', 'grupoController@update');
 Route::post('/grupo/delete/{id}', 'grupoController@destroy');
@@ -55,9 +49,6 @@ Route::get('/grupoRol/{id}', 'gruporolController@show');
 Route::post('/grupoRol/{id}', 'gruporolController@update');
 Route::post('/grupoRol/delete/{id}', 'gruporolController@destroy');
 // FIN DE GRUPO_ROLES	
-
-
-
 
 // USUARIOS	
 Route::get('/usuario', 'usuarioController@index');

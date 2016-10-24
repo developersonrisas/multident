@@ -77,11 +77,12 @@ class grupoController extends Controller
                 return $this->crearRespuesta('No puede registrarse, el nombre del "' . $nombreGrupo . '" ya existe. Pertenece a ' . $tmp->nombre_grupo, [200, 'info']);
             }
         }
-
+        $key = strtolower('key_'. $request['grupo']['nombre_grupo']);
         $datos = [
             'nombre_grupo' => $request['grupo']['nombre_grupo'],
             'descripcion' => $request['grupo']['descripcion'],
             'fecha_modif' => date("Y-m-d H:i:s"),
+            'key_grupo' => $key,
             'idusuario' => '1',
             'estado_grupo' => '1'
         ];
