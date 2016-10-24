@@ -1,0 +1,70 @@
+<style>
+    .grid{ 
+        width: 100%;
+        height: 580px;
+    }  
+    .required{
+        color: #F00;
+        font-size: 11px; 
+    }    
+    .searchlike{
+        width: 300px; color:#000 !important; font-weight: bold;
+    }
+</style>
+
+<script type="text/ng-template" id="myModalContent.html">  
+    <form name="miForm" ng-submit="save();" novalidate>
+    <div class="modal-header">
+    <h3 class="modal-title"><i class="fa fa-exclamation-triangle"></i></h3>
+    </div>
+    <div class="modal-body">
+    <div class="row">
+    <div class="col-xs-12 col-md-12">
+    ¿Seguro de eliminar a: <strong>{{modulo.nombre_modulo}}</strong> ?
+    </div>
+    </div>
+    </div>     
+    <div class="modal-footer">            
+    <button class="btn btn-primary" ng-disabled="miForm.$submitted">
+    <span>Si, eliminar</span>  
+    </button>    
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+    </div>
+    </form>
+</script> 
+
+
+
+        <section class="content-header">
+          <h1>
+            <i class="{{$state.current.data.pageHeader.icono}}"></i> {{$state.current.data.pageHeader.title}}
+            <small></small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li data-ng-repeat="breadcrumb in $state.current.data.breadcrumbs">{{breadcrumb.title}}</li>
+          </ol>
+        </section>
+
+
+<div ng-show="$state.includes('empresaadmin.list')">
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">  
+            <div class="mb-10" style="margin-bottom:5px">                 
+                <a class="btn btn-sm btn-info"  ng-click='btnToggleFiltering()'>Buscar</a>
+
+                <div class="pull-right">   
+                    <a ui-sref="#" class="btn btn-sm btn-success" tooltip-placement="top" uib-tooltip="Ver" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-eye"></i> </a>             
+                    <a class="btn btn-sm btn-danger" tooltip-placement="top" uib-tooltip="Eliminar" ng-if="vm.filaSelecciona.length == 1" ng-click="vm.openModal('delete', vm.filaSelecciona[0])"><i class="fa fa-trash-o"></i> </a>
+                    <a ui-sref="{{vm.stateparent}}.edit({moduloId:vm.filaSelecciona[0].idmodulo})" class="btn btn-sm btn-warning" tooltip-placement="top" uib-tooltip="Editar" ng-if="vm.filaSelecciona.length === 1"><i class="fa fa-pencil"></i> </a> 
+                    <a ui-sref="{{vm.stateparent}}.new" class="btn btn-sm btn-primary">Nuevo</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div ui-grid="vm.gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid fs-mini-grid" style="background: #fff"></div>                
+        </div>
+    </div> 
+</div>
+</div>
+<div ui-view></div>

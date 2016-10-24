@@ -4,23 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class sede extends Model
+class empresa_admin extends Model
 {
-
+    //
     public $timestamps = false;
-    protected $table = 'sede';
-    protected $primaryKey = 'idsede';
+    protected $table = 'empresa_admin';
+    protected $primaryKey = 'idempresa_admin';
     protected $fillable = [
-        'idsede',
-        'nombre_sede',
-        'idubigeo',
-        'direccion',
+        'ruc',
+        'nombre_empresa',					
         'telefono',
+        'email',
         'celular',
-        'telefono_adic',				
+        'telefono_adicional',
+        'direccion',
+        'idubigeo',
+        'representante legal',
+        'logo',
         'fecha_modif',
         'idusuario',
-        'estado_sede'
+        'estado_empresa'
     ];
     //protected $hidden = ['password', 'idempresa','created_at','updated_at'];
 
@@ -43,12 +46,12 @@ class sede extends Model
     }
 
     public function grid($param, $likename, $items = 25, $orderName, $orderSort) {
-        $select = \DB::table('sede')
-                ->select('sede.*')
+        $select = \DB::table('empresa_admin')
+                ->select('empresa_admin.*')
                 ->where($param);
 
         if (!empty($likename)) {
-            $select->whereRaw('sp_ascii(sede.nombre_sede) ilike sp_ascii(?) ', ['%' . $likename . '%']);
+            $select->whereRaw('sp_ascii(empresa_admin.nombre_empresa) ilike sp_ascii(?) ', ['%' . $likename . '%']);
         }
 
 
@@ -59,37 +62,6 @@ class sede extends Model
         foreach ($data as $row) {
             $row->fecha_modif = $this->formatFecha($row->fecha_modif);
         }
-
-        return $data;
-    }
-
-    public function updateSede($data, $idModulo) {
-        \DB::table('sede')->where('idsede', $idsede)->update($data);
-    }
-
-    public function GrabarModulo($data) {
-        if (isset($data['sede'])) {
-            \DB::table('sede')->insert($data['sede']);
-        }
-    }
-
-
-    public function Sede($param) {
-
-        $data = \DB::table('sede')
-                ->select('sede.*')
-                ->where($param)
-                ->first();
-
-        return $data;
-    }
-
-
-    public function get_sedes($param) {
-        $data = \DB::table('sede')
-                ->select('sede.*')
-                ->where($param)
-                ->get();
 
         return $data;
     }

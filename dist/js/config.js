@@ -708,6 +708,107 @@ angular.module('adminLTEConfig', ['ui-notification'])
                 // FIN DE TIPO DE CAMBIO
 
 
+                // PARA SEDES
+                .state('sede', {
+                    abstract: true,
+                    url: '/sede',
+                    templateUrl: 'views/modulos/sede.html',
+                    data: {
+                        pageTitle: 'Sede',
+                        pageHeader: {
+                            icono: 'fa fa-building',
+                            title: 'Gestión de Sedes',
+                            subtitle: ''
+                        },
+                        breadcrumbs: [
+                            {title: 'Administracion'}, {title: 'Sedes'}
+                        ]
+                    },
+                    controller: 'listSedeCtrl',
+                    controllerAs: 'vm',
+                    resolve: {
+                        deps: ['$ocLazyLoad', 'settings', function ($ocLazyLoad, settings) {
+                                return $ocLazyLoad.load(
+                                        [
+                                            {
+                                                name: 'adminLTEApp.sede',
+                                                files: [
+                                                    'dist/js/appServices/sede.services.js',
+                                                    'dist/js/appControllers/sede.js'
+                                                    
+                                                ]
+                                            }
+                                        ]
+                                        );
+                            }]
+                    }
+                })
+
+                .state('sede.list', {url: ''})
+                .state('sede.edit', {
+                        url: '/editar/:sedeId',
+                        templateUrl: 'views/modulos/sede-form.html',
+                        controller: 'editSedeCtrl as vm'
+                })
+
+                .state('sede.new', {
+                        url: '/nuevo',
+                        templateUrl: 'views/modulos/sede-form.html',
+                        controller: 'newSedeCtrl as vm'
+                })
+                // FIN DE SEDES
+
+                // PARA EMPRESAS ADMINISTRADORAS
+                .state('empresaadmin', {
+                    abstract: true,
+                    url: '/empresaadmin',
+                    templateUrl: 'views/modulos/empresaadmin.html',
+                    data: {
+                        pageTitle: 'Empresas Administradoras',
+                        pageHeader: {
+                            icono: 'fa fa-briefcase',
+                            title: 'Gestión de Empresas Administradoras',
+                            subtitle: ''
+                        },
+                        breadcrumbs: [
+                            {title: 'Administracion'}, {title: 'Empresas Administradoras'}
+                        ]
+                    },
+                    controller: 'listEmpresaAdminCtrl',
+                    controllerAs: 'vm',
+                    resolve: {
+                        deps: ['$ocLazyLoad', 'settings', function ($ocLazyLoad, settings) {
+                                return $ocLazyLoad.load(
+                                        [
+                                            {
+                                                name: 'adminLTEApp.empresaadmin',
+                                                files: [
+                                                    'dist/js/appServices/empresa_admin.services.js',
+                                                    'dist/js/appControllers/empresaadmin.js'
+                                                    
+                                                ]
+                                            }
+                                        ]
+                                        );
+                            }]
+                    }
+                })
+
+                .state('empresaadmin.list', {url: ''})
+                .state('empresaadmin.edit', {
+                        url: '/editar/:empresaId',
+                        templateUrl: 'views/modulos/empresaadmin-form.html',
+                        controller: 'editEmpresaAdminCtrl as vm'
+                })
+
+                .state('empresaadmin.new', {
+                        url: '/nuevo',
+                        templateUrl: 'views/modulos/empresaadmin-form.html',
+                        controller: 'newEmpresaAdminCtrl as vm'
+                })
+                // FIN DE SEDES
+
+
 
         })
 

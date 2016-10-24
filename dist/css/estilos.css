@@ -45,3 +45,19 @@
 .modal-xl {
     width: 1150px;
 }
+
+.row-m{
+    margin-bottom: 10px;
+}
+
+.panel-tab .panel-heading ul li a span {
+    display: block;
+    line-height: 15px;
+}
+
+.panel-tab-double .panel-heading ul li a i {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    font-size: 25px;
+}
