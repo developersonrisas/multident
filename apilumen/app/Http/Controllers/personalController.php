@@ -10,6 +10,7 @@ use App\Models\personal;
 use App\Models\empresa;
 use App\Models\sede;
 use App\Models\cargo;
+use App\Models\estadocivil;
 
 class personalController extends Controller
 {
@@ -81,6 +82,7 @@ class personalController extends Controller
 
         $listcombox['sedes'] = sede::select('idsede', 'nombre_sede', 'direccion')->where('estado_sede', '=', 1)->get();
         $listcombox['cargos'] = cargo::where('estado_cargo', '=', 1)->get();
+        $listcombox['estado_civil'] = estadocivil::where('estado_estadocivil', '=', 1)->get();
 
         return $this->crearRespuesta([], 200, '', '', $listcombox);
     }

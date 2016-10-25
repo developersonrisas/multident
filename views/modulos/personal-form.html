@@ -92,16 +92,16 @@
                                 <div class="col-md-12 pb-sm">                                                                                                            
                                     <label class="col-sm-2 col-xs-6 control-label">Fecha nacimiento:</label> 
                                     <div class="col-sm-4 col-xs-6">
-                                        <input  type="text" name="fechanacimiento" ng-model="vm.personal.fecha_nacimiento" maxlength="10" class="form-control input-sm mb-5" data-inputmask="'alias': 'dd/mm/yyyy'" />
+                                        <input data-input-mask type="text" name="fecha_nacimiento" ng-model="vm.personal.fecha_nacimiento" maxlength="10" class="form-control input-sm mb-5" data-inputmask="'alias': 'dd/mm/yyyy'" />
                                     </div> 
                                     <label class="col-sm-2 col-xs-6 control-label">Sexo: <span class="asterisk">*</span></label>   
                                     <div class="col-sm-4 col-xs-6">
                                         <div class="rdio rdio-theme circle radio-inline" >
-                                            <input type="radio" name="sexo" id="radio-type-masculino" ng-model="vm.entidad.sexo" value="M"  ng-required="vm.requiredNombre">
+                                            <input type="radio" name="sexo" id="radio-type-masculino" ng-model="vm.personal.sexo" value="M"  ng-required="vm.requiredNombre">
                                             <label for="radio-type-masculino">Masculino</label>
                                         </div>
                                         <div class="rdio rdio-theme circle radio-inline">
-                                            <input type="radio" name="sexo" id="radio-type-femenino" ng-model="vm.entidad.sexo" value="F" ng-required="vm.requiredNombre">
+                                            <input type="radio" name="sexo" id="radio-type-femenino" ng-model="vm.personal.sexo" value="F" ng-required="vm.requiredNombre">
                                             <label for="radio-type-femenino">Femenino</label>
                                         </div>                                    
                                         <div ng-messages="miForm.sexo.$error" class="required" role="alert" ng-show="miForm.sexo.$dirty">
@@ -140,16 +140,36 @@
                                     </div> 
                                     <label ng-if="vm.stateparent == 'personal' || vm.stateparent == 'medico'" class="col-sm-2 col-xs-6 control-label">Cargo desempeño:</label>                             
                                     <div ng-if="vm.stateparent == 'personal' || vm.stateparent == 'medico'" class="col-sm-4 col-xs-6"> 
-                                        <select ng-model="vm.entidad.idcargoorg" class="form-control input-sm mb-5">
+                                        <select ng-model="vm.personal.idcargo" ng-options="item.idcargo as item.nombre_cargo for item in vm.others.cargos" class="form-control input-sm mb-5">
                                             <option value="">-- Seleccione --</option>
                                         </select>
                                     </div> 
                                 </div>
                             </div> 
+
+                            <div class="row">
+                                <div class="col-md-12 pb-sm">  
+                                    <label class="col-sm-2 col-xs-6 control-label">Teléfono Adic.:</label> 
+                                    <div class="col-sm-4 col-xs-6">
+                                        <input type="text" name="telefono_adic" ng-model="vm.entidad.telefono_adic" class="form-control input-sm mb-5" ng-minlength="9" maxlength="9"/>
+                                        <div ng-messages="miForm.telefono_adic.$error" class="required" role="alert" ng-show="miForm.telefono.$dirty">                                            
+                                            <div ng-message="minlength">Debe ser 9 d&iacute;gitos</div>
+                                        </div>
+                                    </div> 
+                                    <label ng-if="vm.stateparent == 'personal' || vm.stateparent == 'medico'" class="col-sm-2 col-xs-6 control-label">Estado Civil :</label>                             
+                                    <div ng-if="vm.stateparent == 'personal' || vm.stateparent == 'medico'" class="col-sm-4 col-xs-6"> 
+                                        <select ng-model="vm.personal.idestadocivil" ng-options="item.idestadocivil as item.nombre_estadocivil for item in vm.others.estado_civil" class="form-control input-sm mb-5">
+                                            <option value="">-- Seleccione --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <h4 class="mt-10">Direcci&oacute;n</h4>
                             <div class="row">
                                 <div class="col-md-12 pb-sm">                                        
-                                    <label class="col-sm-2 col-xs-12 control-label">Departamento/Prov./Distrito :</label>                             
+                                    <label class="col-sm-2 col-xs-12 control-label">Depart./Prov./Distrito :</label>                             
                                     <div class="col-sm-4 col-xs-4">  
                                         <select name="departamento" ng-model="vm.personal.iddepartamento" ng-options="item.iddepartamento as item.descripcion_ubig for item in vm.others.departamentos" class="form-control input-sm mb-5" ng-change="vm.changeUbigeo({iddepartamento: vm.personal.iddepartamento}, 'provincias')" class="form-control input-sm mb-5" >                                            
                                             <option value="">-- Departamento --</option>
@@ -169,41 +189,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 pb-sm">                                        
-                                    <label class="col-sm-2 col-xs-12 control-label">Direcci&oacute;n:</label>                             
-                                    <div class="col-sm-2 col-xs-12">                                         
-                                        <input type="text" name="codigopostal" ng-model="vm.entidad.codigopostal" placeholder="C&oacute;digo postal" class="form-control input-sm mb-5" ng-minlength="5" maxlength="5"/>
-                                        <div ng-messages="miForm.codigopostal.$error" class="required" role="alert" ng-show="miForm.codigopostal.$dirty">                                            
-                                            <div ng-message="minlength">Debe ser 5 d&iacute;gitos</div>
-                                        </div>
-                                    </div> 
-                                    <div class="col-sm-8 col-xs-12">                                         
-                                        <input type="text" name="direccion" ng-model="vm.entidad.direccion" maxlength="100" class="form-control input-sm mb-5"/>                                    
+                                    <label class="col-sm-2 col-xs-12 control-label">Direcci&oacute;n:</label>                              
+                                    <div class="col-sm-10 col-xs-12">                                         
+                                        <input type="text" name="direccion" ng-model="vm.personal.direccion" maxlength="100" class="form-control input-sm mb-5"/>                                    
                                     </div> 
                                 </div>
                             </div> 
-                            <h4 class="mt-10">Internet</h4>
-                            <div class="row">
-                                <div class="col-md-12 pb-sm">  
-                                    <label class="col-sm-2 col-xs-6 control-label">Facebook: <i class="fa fa-facebook-official"></i></label> 
-                                    <div class="col-sm-4 col-xs-6">
-                                        <input type="text" name="facebook" ng-model="vm.entidad.facebook" class="form-control input-sm mb-5" maxlength="50"/>
-                                    </div> 
-                                    <label class="col-sm-2 col-xs-6 control-label">Twitter: <i class="fa fa-twitter"></i></label> 
-                                    <div class="col-sm-4 col-xs-6">
-                                        <input type="text" name="twitter" ng-model="vm.entidad.twitter" class="form-control input-sm mb-5" maxlength="50"/>
-                                    </div> 
-                                </div>
-                                <div class="col-md-12 pb-sm">  
-                                    <label class="col-sm-2 col-xs-6 control-label">Página web: <i class="fa fa-chrome"></i> </label> 
-                                    <div class="col-sm-4 col-xs-6">
-                                        <input type="text" name="paginaweb"  ng-model="vm.entidad.paginaweb" class="form-control input-sm mb-5" maxlength="100"/>
-                                    </div> 
-                                    <label class="col-sm-2 col-xs-6 control-label">Whatsapp: <i class="fa fa-whatsapp"></i> </label> 
-                                    <div class="col-sm-4 col-xs-6">
-                                        <input type="text"  name="whatsapp"  ng-model="vm.entidad.whatsapp" class="form-control input-sm mb-5" maxlength="50"/>
-                                    </div> 
-                                </div>
-                            </div>                                                        
+                                                        
                         </div>
 
 

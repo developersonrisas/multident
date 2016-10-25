@@ -2,6 +2,15 @@
 (function () {
     angular.module('adminLTEDirective', [])
 
+    .directive('inputMask', function () {
+        return {
+            restrict: 'A',
+                link: function (scope, element) {
+                element.inputmask();
+            }
+        }
+    })
+
     .directive('sidebar', function(){
         return {
             restrict: 'C',
