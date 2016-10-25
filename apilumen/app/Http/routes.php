@@ -96,3 +96,20 @@ Route::post('/tipoCambio', 'tipoCambioController@store');
 Route::post('/tipoCambio/{id}', 'tipoCambioController@update');
 Route::post('/tipoCambio/delete/{id}', 'tipoCambioController@destroy');
 // FIN DE TIPO DE CAMBIO		
+
+
+// SEDES	
+Route::get('/sede', 'sedeController@index');
+Route::get('/sede/{id}', 'sedeController@show');
+Route::post('/sede', 'sedeController@store');
+Route::post('/sede/{id}', 'sedeController@update');
+Route::post('/sede/delete/{id}', 'sedeController@destroy');
+// FIN DE SEDES	
+
+// EMPRESAS ADMIN	
+Route::get('/empresaadmin', 'empresaadminController@index');
+Route::get('/empresaadmin/{id}', 'empresaadminController@show');
+Route::post('/empresaadmin', 'empresaadminController@store');
+Route::post('/empresaadmin/{id}', 'empresaadminController@update');
+Route::post('/empresaadmin/delete/{id}', 'empresaadminController@destroy');
+// FIN DE EMPRESAS ADMIN	
